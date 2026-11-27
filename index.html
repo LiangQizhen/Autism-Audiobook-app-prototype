@@ -221,6 +221,1269 @@ button:active .pola{transform:rotate(0deg) scale(.97)}
 .toast .tt{display:flex;flex-direction:column;gap:1px}
 .toast .tt span{font-weight:500;color:#AEBBC9;font-size:.84rem}
 
+
+/* v4: intro, sign-up, tour, pick feedback */
+.intro{padding:16px 24px 28px;gap:18px}
+.introtop{display:flex;justify-content:flex-end;min-height:44px}
+.introart{height:236px;position:relative;display:flex;align-items:center;justify-content:center}
+.introdots{display:flex;gap:7px}
+.introdots i{display:block;width:8px;height:8px;border-radius:4px;background:rgba(24,40,58,.16);transition:width .35s var(--ease),background .35s}
+.introdots i.on{width:24px;background:var(--i)}
+.introfoot{margin-top:auto;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.nextbtn{width:64px;height:64px;border-radius:50%;border:0;background:var(--i);color:#fff;display:grid;place-items:center;box-shadow:0 12px 26px rgba(24,40,58,.25)}
+.mockai{width:270px;padding:18px;border-radius:24px;background:#fff;box-shadow:0 16px 40px rgba(24,40,58,.14);display:flex;flex-direction:column;gap:12px}
+.mockai .r{display:flex;align-items:center;gap:10px}
+.mockai .ln{height:9px;border-radius:5px;background:rgba(24,40,58,.10)}
+.mockkeys{display:flex;gap:4px;padding:10px;border-radius:20px;background:#fff;box-shadow:0 16px 40px rgba(24,40,58,.14);position:relative}
+.mockkeys i{display:block;width:26px;height:110px;border-radius:0 0 8px 8px;background:linear-gradient(#fff,#EEF2F7);box-shadow:inset 0 0 0 1px rgba(24,40,58,.10)}
+.mockkeys i.k{background:var(--ai);box-shadow:none}
+.mockpost{position:absolute;right:-34px;bottom:-26px;width:170px;padding:12px;border-radius:16px;background:#fff;box-shadow:0 14px 30px rgba(24,40,58,.16);display:flex;flex-direction:column;gap:4px;transform:rotate(3deg)}
+.flabel{font-size:.86rem;font-weight:800;color:var(--i)}
+.field.bad{border-color:#E5484D;box-shadow:0 0 0 3px rgba(229,72,77,.12)}
+.err{color:#D13F45;font-size:.82rem;font-weight:700;display:flex;align-items:center;gap:6px;margin:0}
+.err::before{content:'!';display:inline-grid;place-items:center;width:16px;height:16px;border-radius:50%;background:#E5484D;color:#fff;font-size:.7rem;font-weight:900}
+.shake{animation:shake .4s}
+@keyframes shake{20%,60%{transform:translateX(-8px)}40%,80%{transform:translateX(8px)}}
+.fb{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px 14px;border-radius:18px;background:rgba(255,255,255,.7);border:1px solid rgba(255,255,255,.9)}
+.fb .q{font-size:.9rem;font-weight:700;color:var(--i)}
+.fb .btns{display:flex;gap:8px}
+.fb .btn{min-height:40px;padding:0 14px}
+.fb.done{justify-content:flex-start;color:#2E8B60;font-weight:700;font-size:.88rem}
+.opt{display:flex;align-items:center;gap:14px;width:100%;text-align:left;padding:16px;border-radius:20px;border:1px solid var(--line);background:#fff;min-height:72px}
+.opt .av{width:44px;height:44px;border-radius:14px;flex-shrink:0}
+#tour{position:absolute;inset:0;z-index:60}
+#tour .spot{position:absolute;border-radius:22px;box-shadow:0 0 0 2px rgba(255,255,255,.9),0 0 0 9999px rgba(12,20,30,.58);transition:all .45s var(--ease);pointer-events:none}
+#tour .bub{position:absolute;left:16px;right:16px;padding:18px;border-radius:22px;background:#fff;box-shadow:0 20px 44px rgba(0,0,0,.25);display:flex;flex-direction:column;gap:8px;transition:top .45s var(--ease)}
+#tour .bub b{font-size:1.08rem;color:var(--i)}
+#tour .bub p{margin:0;font-size:.92rem;font-weight:600;color:var(--o);line-height:1.4}
+#tour .row{display:flex;align-items:center;justify-content:space-between;margin-top:6px}
+#tour .tdots{display:flex;gap:6px}
+#tour .tdots i{display:block;width:7px;height:7px;border-radius:50%;background:rgba(24,40,58,.18)}
+#tour .tdots i.on{background:var(--i)}
+
+/* one font everywhere */
+.hand,.pola .cap,.tag.you{font-family:inherit;letter-spacing:-.01em}
+.hi{font-size:1rem;font-weight:600;line-height:1.3;color:var(--m)}
+.sect{font-size:1.2rem;font-weight:800;letter-spacing:-.02em}
+.topbar .date{font-size:.9rem;font-weight:700;color:var(--m)}
+.pola .cap{font-size:.8rem;font-weight:700;line-height:1.25;padding:7px 2px 9px}
+.pola .cap small{font-size:.72rem;font-weight:600}
+.who{font-size:1rem;font-weight:800}
+.empty{font-size:1rem;font-weight:700}
+.replies .hand{font-size:.9rem;font-weight:800}
+.summary .sect{font-size:1.2rem !important}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><linearGradient id="aiG" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#5B8DEF"/><stop offset=".5" stop-color="#8E7CF3"/><stop offset="1" stop-color="#46B3C9"/></linearGradient></defs></svg><div id="shell"><div id="app"><div class="bg" aria-hidden="true"><i></i><i></i><i></i></div><div id="view" style="flex:1;min-height:0;display:flex;flex-direction:column"></div><div id="fx" aria-hidden="true"></div><div class="toast" id="toast" role="status" aria-live="polite"></div></div></div>
+<script>
+(function () {
+'use strict';
+
+/* ---------- icons ---------- */
+const IC = {
+  home: '<path d="M3 11.5 12 4l9 7.5"/><path d="M5.5 10v9.5h13V10"/><path d="M10 19.5v-5h4v5"/>',
+  book: '<path d="M12 6.5c-2-1.5-5-2-8-1.5v13c3-.5 6 0 8 1.5 2-1.5 5-2 8-1.5V5c-3-.5-6 0-8 1.5z"/><path d="M12 6.5v13"/>',
+  piano: '<rect x="3.5" y="5" width="17" height="14" rx="2"/><path d="M8.2 5v14M12 5v14M15.8 5v14"/><path d="M8.2 5v7M12 5v7M15.8 5v7" stroke-width="3.2"/>',
+  user: '<circle cx="12" cy="8.5" r="3.5"/><path d="M5 19.5a7 7 0 0 1 14 0"/>',
+  play: '<path d="M8 5.5v13l11-6.5z" fill="currentColor"/>',
+  pause: '<path d="M8.5 6v12M15.5 6v12" stroke-width="3"/>',
+  back: '<path d="M19 12H5"/><path d="M11 6l-6 6 6 6"/>',
+  heart: '<path d="M12 20s-7.5-4.6-7.5-10A4.3 4.3 0 0 1 12 7.2 4.3 4.3 0 0 1 19.5 10c0 5.4-7.5 10-7.5 10z"/>',
+  search: '<circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/>',
+  spark: '<path d="M12 3.5l1.9 5.1 5.1 1.9-5.1 1.9L12 17.5l-1.9-5.1L5 10.5l5.1-1.9z"/><path d="M18.5 15.5v4M16.5 17.5h4"/>',
+  lock: '<rect x="5" y="10.5" width="14" height="9.5" rx="2.5"/><path d="M8 10.5V8a4 4 0 0 1 8 0v2.5"/>',
+  restart: '<path d="M4 5v5h5"/><path d="M5.2 14.5A7.5 7.5 0 1 0 7 7.2L4 10"/>',
+  x: '<path d="M6 6l12 12M18 6L6 18"/>',
+  check: '<path d="M5 12.5l4.5 4.5L19 7.5"/>',
+  rec: '<circle cx="12" cy="12" r="6" fill="currentColor"/>',
+  stop: '<rect x="7" y="7" width="10" height="10" rx="2" fill="currentColor"/>',
+  wave: '<path d="M3 9c2-2 4-2 6 0s4 2 6 0 4-2 6 0"/><path d="M3 15c2-2 4-2 6 0s4 2 6 0 4-2 6 0"/>',
+  leaf: '<path d="M5 19C4 11 9 5 19 5c0 10-6 15-14 14z"/><path d="M5 19l9-9"/>',
+  note: '<path d="M9.5 17.5V6l9-2v11.5"/><circle cx="7" cy="17.5" r="2.5"/><circle cx="16" cy="15.5" r="2.5"/>',
+  reply: '<path d="M5 5h14a1.5 1.5 0 0 1 1.5 1.5v8A1.5 1.5 0 0 1 19 16h-7l-4.5 4v-4H5a1.5 1.5 0 0 1-1.5-1.5v-8A1.5 1.5 0 0 1 5 5z"/>',
+  chev: '<path d="M9 5l7 7-7 7"/>',
+  sliders: '<path d="M4 7h8M18 7h2"/><circle cx="15" cy="7" r="2.5"/><path d="M4 17h2M12 17h8"/><circle cx="9" cy="17" r="2.5"/>',
+  hide: '<path d="M3 3l18 18"/><path d="M10.6 6.1A9.5 9.5 0 0 1 12 6c6 0 9.5 6 9.5 6a16 16 0 0 1-2.7 3.4M6.5 7.6C4 9.3 2.5 12 2.5 12S6 18 12 18c1.5 0 2.9-.4 4.1-1"/>',
+  metro: '<path d="M8 20h8l-2.5-15h-3z"/><path d="M12 15l5-8"/>',
+  plus: '<path d="M12 5v14M5 12h14"/>',
+  clock: '<circle cx="12" cy="12" r="8"/><path d="M12 7.5V12l3 2"/>',
+  moon: '<path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/>',
+  rocket: '<path d="M5 15c-1.5 1.3-2 5-2 5s3.7-.5 5-2c.7-.8.7-2.1-.1-2.9a2.1 2.1 0 0 0-2.9-.1z"/><path d="M12 15l-3-3a22 22 0 0 1 2-4A12.9 12.9 0 0 1 22 2c0 2.7-.8 7.5-6 11a22.4 22.4 0 0 1-4 2z"/><path d="M9 12H4s.6-3 2-4c1.6-1.1 5 0 5 0M12 15v5s3-.6 4-2c1.1-1.6 0-5 0-5"/>',
+  compass: '<circle cx="12" cy="12" r="9"/><path d="M15.5 8.5l-2 5-5 2 2-5z"/>',
+  flask: '<path d="M9 3h6M10 3v6l-5 9a2 2 0 0 0 1.8 3h10.4a2 2 0 0 0 1.8-3l-5-9V3"/><path d="M7.5 15h9"/>',
+  pen: '<path d="M20.2 4a6 6 0 0 0-8.5 0L5 10.8V19h8.2l6.8-6.7a6 6 0 0 0 0-8.4z"/><path d="M16 8L2 22M17.5 15H9"/>',
+  gear: '<circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/>'
+};
+function ic(n, s, extra) {
+  s = s || 24;
+  return '<svg viewBox="0 0 24 24" width="' + s + '" height="' + s + '" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"' + (extra || '') + '>' + IC[n] + '</svg>';
+}
+function esc(s) { return String(s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
+
+/* ---------- music data ---------- */
+function N(n) {
+  const m = n.match(/^([A-G])(#?)(\d)$/);
+  return 12 * (+m[3] + 1) + { C: 0, D: 2, E: 4, F: 5, G: 7, A: 9, B: 11 }[m[1]] + (m[2] ? 1 : 0);
+}
+function seq(str, bpm, start) {
+  let t = start || 0;
+  const b = 60 / bpm, out = [];
+  str.trim().split(/\s+/).forEach(function (tok) {
+    const parts = tok.split(':');
+    const d = parseFloat(parts[1]) * b;
+    if (parts[0] !== 'R') parts[0].split('+').forEach(function (x) { out.push({ m: N(x), t: t, d: d }); });
+    t += d;
+  });
+  return { notes: out, len: t };
+}
+function merge() {
+  const all = [];
+  let len = 0;
+  Array.prototype.forEach.call(arguments, function (s) { s.notes.forEach(function (n) { all.push(n); }); len = Math.max(len, s.len); });
+  all.sort(function (a, b) { return a.t - b.t; });
+  return { notes: all, len: len + 1.2 };
+}
+function melody(seed, bpm) {
+  let x = seed;
+  function r() { x = (x * 9301 + 49297) % 233280; return x / 233280; }
+  const scale = ['C4', 'D4', 'E4', 'G4', 'A4', 'C5', 'D5', 'E5', 'G5', 'A5'];
+  let idx = 4, s = '';
+  for (let i = 0; i < 16; i++) {
+    idx = Math.max(0, Math.min(scale.length - 1, idx + Math.floor(r() * 5) - 2));
+    const bass = i % 4 === 0 ? '+' + ['C3', 'A2', 'F2', 'G2'][(i / 4) % 4] : '';
+    s += scale[idx] + bass + ':' + (r() < 0.3 ? 2 : 1) + ' ';
+  }
+  return merge(seq(s + 'C4+C3+G3:3', bpm));
+}
+const GYM_ACC = seq('G2:1 B3+D4+F#4:2 D2:1 A3+C#4+F#4:2 '.repeat(6), 72);
+const GYM_MEL = seq('F#5:1 A5:1 G5:1 F#5:1 C#5:1 B4:1 C#5:1 D5:1 A4:1 F#4:3 R:3 F#5:1 A5:1 G5:1 F#5:1 C#5:1 B4:1 C#5:1 D5:1 A4:1 C#5:3 F#5:3', 72, 12 * 60 / 72 * 1);
+
+/* ---------- catalogue ---------- */
+const TINT = { Recommended: 'linear-gradient(145deg,#DCE7F7,#B9CDEB)', Novels: 'linear-gradient(145deg,#E7E2F8,#C9BFEE)', 'Non-fiction': 'linear-gradient(145deg,#DDF0E6,#B7DCC8)', Poetry: 'linear-gradient(145deg,#F6E8DA,#E8CDB2)', Classical: 'linear-gradient(145deg,#E3EAF4,#BCCBE0)', 'Nature sounds': 'linear-gradient(145deg,#DDF1EE,#AFD9D3)', Community: 'linear-gradient(145deg,#ECE6FA,#CFC3F1)' };
+const ITEMS = {};
+function addBook(id, title, by, cat, genre, text) { ITEMS[id] = { id: id, type: 'book', title: title, by: by, cat: cat, genre: genre, words: text.split(/\s+/) }; }
+addBook('pride', 'Pride and Prejudice', 'Jane Austen', 'Recommended', 'Classic stories', 'It is a truth universally acknowledged, that a single man in possession of a good fortune, must be in want of a wife.');
+addBook('holmes', 'The Adventures of Sherlock Holmes', 'Arthur Conan Doyle', 'Recommended', 'Mystery', 'To Sherlock Holmes she is always the woman. I have seldom heard him mention her under any other name.');
+addBook('littlewomen', 'Little Women', 'Louisa May Alcott', 'Recommended', 'Classic stories', 'Christmas won\'t be Christmas without any presents, grumbled Jo, lying on the rug.');
+addBook('frank', 'Frankenstein', 'Mary Shelley', 'Novels', 'Science fiction', 'You will rejoice to hear that no disaster has accompanied the commencement of an enterprise which you have regarded with such evil forebodings.');
+addBook('timemachine', 'The Time Machine', 'H. G. Wells', 'Novels', 'Science fiction', 'The Time Traveller, for so it will be convenient to speak of him, was expounding a recondite matter to us.');
+addBook('hound', 'The Hound of the Baskervilles', 'Arthur Conan Doyle', 'Novels', 'Mystery', 'Mr. Sherlock Holmes, who was usually very late in the mornings, was seated at the breakfast table.');
+addBook('wild', 'The Call of the Wild', 'Jack London', 'Novels', 'Adventure', 'Buck did not read the newspapers, or he would have known that trouble was brewing.');
+addBook('mankind', 'The Story of Mankind', 'Hendrik Willem van Loon', 'Non-fiction', 'History', 'High up in the North in the land called Svithjod, there stands a rock.');
+addBook('fairyland', 'The Fairy-Land of Science', 'Arabella B. Buckley', 'Non-fiction', 'Science', 'I have promised to introduce you today to the fairy-land of science.');
+addBook('origin', 'On the Origin of Species', 'Charles Darwin', 'Non-fiction', 'Science', 'When on board the Beagle, as naturalist, I was much struck with certain facts in the distribution of the inhabitants of South America.');
+addBook('dickinson', 'Poems', 'Emily Dickinson', 'Poetry', 'Poetry', 'Hope is the thing with feathers that perches in the soul, and sings the tune without the words, and never stops at all.');
+addBook('whitman', 'Leaves of Grass', 'Walt Whitman', 'Poetry', 'Poetry', 'I celebrate myself, and sing myself, and what I assume you shall assume.');
+addBook('frost', 'A Boy\'s Will', 'Robert Frost', 'Poetry', 'Poetry', 'I\'m going out to clean the pasture spring; I\'ll only stop to rake the leaves away.');
+function addSynth(id, title, by, genre, s) { ITEMS[id] = { id: id, type: 'music', kind: 'synth', cat: 'Classical', src: 'From YouTube', title: title, by: by, genre: genre, notes: s.notes, len: s.len }; }
+addSynth('minuet', 'Minuet in G', 'attributed to J. S. Bach', 'Calm piano', merge(seq('D5+G3+B3:1 G4:.5 A4:.5 B4:.5 C5:.5 D5+B3:1 G4:1 G4:1 E5+C4:1 C5:.5 D5:.5 E5:.5 F#5:.5 G5+B3:1 G4:1 G4:1 C5+A3:1 D5:.5 C5:.5 B4:.5 A4:.5 B4+G3:1 C5:.5 B4:.5 A4:.5 G4:.5 F#4+D3:1 G4:.5 A4:.5 B4:.5 G4:.5 A4+D3+F#3:3', 120)));
+addSynth('ode', 'Ode to Joy', 'Ludwig van Beethoven', 'Calm piano', merge(seq('E5+C3:1 E5:1 F5:1 G5:1 G5+G3:1 F5:1 E5:1 D5:1 C5+C3:1 C5:1 D5:1 E5:1 E5+G3:1.5 D5:.5 D5:2 E5+C3:1 E5:1 F5:1 G5:1 G5+G3:1 F5:1 E5:1 D5:1 C5+C3:1 C5:1 D5:1 E5:1 D5+G3:1.5 C5:.5 C5+C3+G3:3', 100)));
+addSynth('elise', 'Für Elise', 'Ludwig van Beethoven', 'Calm piano', merge(seq('E5:1 D#5:1 E5:1 D#5:1 E5:1 B4:1 D5:1 C5:1 A4+A2:2 R:1 C4:1 E4:1 A4:1 B4+E2:2 R:1 E4:1 G#4:1 B4:1 C5+A2:2 R:1 E4:1 E5:1 D#5:1 E5:1 D#5:1 E5:1 B4:1 D5:1 C5:1 A4+A2:2 R:1 C4:1 E4:1 A4:1 B4+E2:2 R:1 E4:1 C5:1 B4:1 A4+A2:4', 160)));
+addSynth('gymno', 'Gymnopédie No. 1', 'Erik Satie', 'Ambient', merge(GYM_ACC, GYM_MEL));
+function addNature(id, title, kind) { ITEMS[id] = { id: id, type: 'music', kind: 'noise', noise: kind, cat: 'Nature sounds', src: 'Nature sound', title: title, by: 'Nature sounds', genre: 'Nature sounds' }; }
+addNature('rain', 'Soft rain', 'rain');
+addNature('ocean', 'Ocean waves', 'ocean');
+addNature('wind', 'Forest wind', 'wind');
+
+const PRESETS = ['Love this!', 'So calming', 'Nice melody', 'Play more, please', 'Thank you for sharing'];
+const POSTS = [
+  { id: 'p1', author: 'Mira', title: 'Morning Steps', genre: 'Calm piano', when: '2 h ago', likes: 12, liked: false, replies: [{ who: 'Kai', text: 'So calming' }], s: melody(3, 84) },
+  { id: 'p2', author: 'Kai', title: 'Quiet Bus Ride', genre: 'Calm piano', when: 'Yesterday', likes: 8, liked: false, replies: [], s: melody(7, 72) },
+  { id: 'p3', author: 'Lena', title: 'Rain on the Window', genre: 'Ambient', when: 'Yesterday', likes: 15, liked: false, replies: [{ who: 'Mira', text: 'Love this!' }, { who: 'Ahmad', text: 'Nice melody' }], s: melody(11, 66) },
+  { id: 'p4', author: 'Ahmad', title: 'Slow Stars', genre: 'Ambient', when: 'Monday', likes: 5, liked: false, replies: [], s: melody(19, 60) }
+];
+function registerPost(p) { ITEMS[p.id] = { id: p.id, type: 'music', kind: 'synth', cat: 'Community', src: 'Community', title: p.title, by: p.author === 'You' ? 'You' : p.author, genre: p.genre, notes: p.s.notes, len: p.s.len }; }
+POSTS.forEach(registerPost);
+
+const GENRES = ['Calm piano', 'Ambient', 'Nature sounds', 'Classic stories', 'Mystery', 'Science fiction', 'Adventure', 'History', 'Science', 'Poetry'];
+
+/* ---------- state ---------- */
+const S = {
+  screen: 'welcome', ob: 0, email: '', age: '', obErr: {}, obPin: '', obPin1: '', obPinErr: '', userPin: '', tour: null, pickFb: null, fbOpen: false, pickNote: '', skipPicks: new Set(), lessGenres: new Set(), moodCalm: false, pinErr: false, pubOpen: false, tab: 'home', name: '', libTab: 'books', bookCat: 'Recommended', musicCat: 'Classical', q: '',
+  createTab: 'piano', cfeed: 'foryou', replyOpen: null, editName: false, newName: '', pickOpen: false, pickAnim: false, editInt: false, tmpInt: new Set(),
+  interests: new Set(), favs: new Set(['gymno', 'holmes']),
+  current: null, playing: false, pos: 0, wordIdx: 0,
+  vol: 70, cap: 80, speed: 'Normal', textSize: 'M', calm: false, showWords: true,
+  notForMe: new Set(), hidden: new Set(), blockedGenres: new Set(), sugg1: null, sugg2: null,
+  locked: false, community: true, pin: '',
+  rec: { state: 'idle', notes: [], t0: 0, heard: false }, metro: false, bpm: 80, pvol: 70, pieceName: '',
+  posts: POSTS, following: new Set(['Mira']),
+  history: [
+    { title: 'Gymnopédie No. 1', src: 'YouTube', genre: 'Ambient', ok: true, result: 'Finished', when: 'Today 9:10' },
+    { title: 'Party hits mix', src: 'YouTube', genre: 'Pop', ok: false, result: 'Skipped after 0:15', when: 'Today 9:05' },
+    { title: 'Soft rain', src: 'App', genre: 'Nature sounds', ok: true, result: 'Listened 20 min', when: 'Yesterday 21:30' },
+    { title: 'Minuet in G', src: 'YouTube', genre: 'Calm piano', ok: true, result: 'Finished', when: 'Yesterday 20:50' },
+    { title: 'Loud drum solo', src: 'YouTube', genre: 'Rock', ok: false, result: 'Skipped after 0:08', when: 'Yesterday 20:40' },
+    { title: 'The Time Machine', src: 'App', genre: 'Science fiction', ok: true, result: 'Listened 12 min', when: 'Monday' },
+    { title: 'Rain sounds for sleep', src: 'YouTube', genre: 'Nature sounds', ok: true, result: 'Finished', when: 'Monday' }
+  ]
+};
+let saved = null; try { saved = JSON.parse(localStorage.getItem('ab_user') || 'null'); } catch (e) { }
+if (saved) { S.screen = 'tabs'; S.name = saved.name || ''; S.interests = new Set(saved.interests || []); S.email = saved.email || ''; S.age = saved.age || ''; S.userPin = saved.pin || ''; }
+function saveUser() { try { localStorage.setItem('ab_user', JSON.stringify({ name: S.name, interests: Array.from(S.interests), email: S.email, age: S.age, pin: S.userPin })); } catch (e) { } }
+function who() { return S.name.trim() || 'Alex'; }
+function listText(a, word) { a = a.map(function (x) { return x.toLowerCase(); }); return a.length < 2 ? a.join('') : a.slice(0, -1).join(', ') + ' ' + word + ' ' + a[a.length - 1]; }
+
+/* ---------- AI recommender ---------- */
+function scores() {
+  const g = {};
+  S.interests.forEach(function (x) { g[x] = (g[x] || 0) + 3; });
+  S.history.forEach(function (h) { g[h.genre] = (g[h.genre] || 0) + (h.ok ? 2 : -2); });
+  S.lessGenres.forEach(function (x) { g[x] = (g[x] || 0) - 4; });
+  if (S.moodCalm) ['Calm piano', 'Ambient', 'Nature sounds'].forEach(function (x) { g[x] = (g[x] || 0) + 5; });
+  return g;
+}
+function finishedCount(genre) { return S.history.filter(function (h) { return h.ok && h.genre === genre; }).length; }
+function reasonFor(genre) {
+  if (S.moodCalm && ['Calm piano', 'Ambient', 'Nature sounds'].indexOf(genre) >= 0) return 'Something gentle for today';
+  if (finishedCount(genre) > 0) return 'You often finish ' + genre.toLowerCase();
+  return 'You said you like ' + genre.toLowerCase();
+}
+function candidates(includeHidden) {
+  const g = scores();
+  const genres = Object.keys(g).filter(function (k) { return g[k] > 0 && !S.blockedGenres.has(k); }).sort(function (a, b) { return g[b] - g[a]; });
+  const pools = genres.map(function (gen) {
+    return Object.values(ITEMS).filter(function (it) {
+      return it.genre === gen && !S.notForMe.has(it.id) && (includeHidden || !S.skipPicks.has(it.id)) && (includeHidden || !S.hidden.has(it.id)) && !(it.cat === 'Community' && (!S.community || it.by === 'You'));
+    });
+  });
+  const out = [];
+  for (let round = 0; round < 3 && out.length < 5; round++) {
+    pools.forEach(function (pool, k) { if (pool[round] && out.length < 5) out.push({ it: pool[round], reason: reasonFor(genres[k]) }); });
+  }
+  return out;
+}
+
+/* ---------- audio ---------- */
+let ctx = null, master = null;
+function audio() {
+  if (!ctx) {
+    const AC = window.AudioContext || window.webkitAudioContext;
+    if (!AC) return null;
+    ctx = new AC();
+    master = ctx.createGain();
+    master.gain.value = S.vol / 100;
+    master.connect(ctx.destination);
+  }
+  if (ctx.state === 'suspended') ctx.resume();
+  return ctx;
+}
+function setMaster() { if (master) master.gain.setTargetAtTime(S.vol / 100, ctx.currentTime, 0.05); }
+function tone(m, t, d, v, dest) {
+  const f = 440 * Math.pow(2, (m - 69) / 12);
+  const o = ctx.createOscillator(), o2 = ctx.createOscillator(), g = ctx.createGain(), g2 = ctx.createGain();
+  o.type = 'triangle'; o.frequency.value = f;
+  o2.type = 'sine'; o2.frequency.value = f * 2; g2.gain.value = 0.2;
+  o2.connect(g2); g2.connect(g); o.connect(g); g.connect(dest);
+  const peak = v * (m < 52 ? 0.28 : 0.34);
+  g.gain.setValueAtTime(0.0001, t);
+  g.gain.exponentialRampToValueAtTime(peak, t + 0.012);
+  g.gain.exponentialRampToValueAtTime(peak * 0.45, t + Math.min(d, 0.35) + 0.02);
+  g.gain.exponentialRampToValueAtTime(0.0001, t + d + 0.9);
+  o.start(t); o2.start(t); o.stop(t + d + 1); o2.stop(t + d + 1);
+}
+let noiseBuf = null;
+function noiseBuffer() {
+  if (noiseBuf) return noiseBuf;
+  noiseBuf = ctx.createBuffer(1, ctx.sampleRate * 3, ctx.sampleRate);
+  const d = noiseBuf.getChannelData(0);
+  let last = 0;
+  for (let i = 0; i < d.length; i++) { const w = Math.random() * 2 - 1; last = (last + 0.02 * w) / 1.02; d[i] = w * 0.5 + last * 3; }
+  return noiseBuf;
+}
+function startNoise(kind, dest) {
+  const src = ctx.createBufferSource(); src.buffer = noiseBuffer(); src.loop = true;
+  const f = ctx.createBiquadFilter(), g = ctx.createGain(), lfo = ctx.createOscillator(), lg = ctx.createGain();
+  const nodes = [src, lfo];
+  if (kind === 'rain') { f.type = 'highpass'; f.frequency.value = 900; g.gain.value = 0.18; lfo.frequency.value = 0.3; lg.gain.value = 0.03; lfo.connect(lg); lg.connect(g.gain); }
+  if (kind === 'ocean') { f.type = 'lowpass'; f.frequency.value = 650; g.gain.value = 0.3; lfo.frequency.value = 0.12; lg.gain.value = 0.26; lfo.connect(lg); lg.connect(g.gain); }
+  if (kind === 'wind') { f.type = 'bandpass'; f.frequency.value = 450; f.Q.value = 0.9; g.gain.value = 0.45; lfo.frequency.value = 0.15; lg.gain.value = 260; lfo.connect(lg); lg.connect(f.frequency); }
+  src.connect(f); f.connect(g); g.connect(dest);
+  src.start(); lfo.start();
+  return function () { nodes.forEach(function (n) { try { n.stop(); } catch (e) { } }); };
+}
+
+/* ---------- playback ---------- */
+const P = { bus: null, t0: 0, endTimer: 0, stopNoise: null, raf: 0, tok: 0, fb: 0, logged: false };
+function cur() { return S.current ? ITEMS[S.current] : null; }
+function now() { return ctx ? ctx.currentTime : 0; }
+function elapsed() { const it = cur(); if (!it) return 0; if (it.type === 'book') return S.wordIdx; return S.playing ? now() - P.t0 : S.pos; }
+function stopEngine() {
+  clearTimeout(P.endTimer); clearTimeout(P.fb); clearInterval(P.fb);
+  P.tok++;
+  if (window.speechSynthesis) speechSynthesis.cancel();
+  if (P.bus) { const b = P.bus; b.gain.setTargetAtTime(0.0001, now(), 0.03); setTimeout(function () { try { b.disconnect(); } catch (e) { } }, 300); P.bus = null; }
+  if (P.stopNoise) { P.stopNoise(); P.stopNoise = null; }
+  cancelAnimationFrame(P.raf);
+}
+function play() {
+  const it = cur(); if (!it) return;
+  stopEngine();
+  if (it.type === 'book') { S.playing = true; speakFrom(S.wordIdx); loop(); return; }
+  if (!audio()) { toast('Sound is not supported in this browser.'); return; }
+  P.bus = ctx.createGain(); P.bus.gain.value = 1; P.bus.connect(master);
+  if (it.kind === 'noise') {
+    P.t0 = now() - S.pos;
+    P.stopNoise = startNoise(it.noise, P.bus);
+  } else {
+    if (S.pos >= it.len - 0.05) S.pos = 0;
+    P.t0 = now() - S.pos + 0.05;
+    it.notes.forEach(function (n) { if (n.t >= S.pos - 0.001) tone(n.m, P.t0 + n.t, n.d, 1, P.bus); });
+    P.endTimer = setTimeout(finish, (it.len - S.pos + 0.1) * 1000);
+  }
+  S.playing = true; loop();
+}
+function pause() {
+  const it = cur();
+  if (it && it.type !== 'book') S.pos = elapsed();
+  stopEngine(); S.playing = false;
+  if (it && it.kind === 'noise' && S.pos > 10 && !P.logged) { P.logged = true; logPlay(it, true, 'Listened ' + fmt(S.pos)); }
+}
+function finish() {
+  const it = cur(); stopEngine(); S.playing = false; S.pos = 0;
+  if (it) { if (it.type === 'book') S.wordIdx = 0; logPlay(it, true, 'Finished'); }
+  render();
+}
+function logPlay(it, ok, result) { S.history.unshift({ title: it.title, src: 'App', genre: it.genre, ok: ok, result: result, when: 'Just now' }); }
+function speakFrom(i) {
+  const it = cur(); const words = it.words; const rate = { Slow: 0.8, Normal: 1, Fast: 1.2 }[S.speed];
+  const tok = ++P.tok;
+  function fallback() { P.fb = setInterval(function () { if (P.tok !== tok) return; if (S.wordIdx < words.length - 1) setWord(S.wordIdx + 1); else { clearInterval(P.fb); finish(); } }, 420 / rate); }
+  if (!window.speechSynthesis || !window.SpeechSynthesisUtterance) { fallback(); return; }
+  const rest = words.slice(i), starts = []; let c = 0;
+  rest.forEach(function (w) { starts.push(c); c += w.length + 1; });
+  const u = new SpeechSynthesisUtterance(rest.join(' '));
+  u.lang = 'en-GB'; u.rate = rate; u.volume = S.vol / 100;
+  let got = false;
+  u.onboundary = function (e) {
+    if (P.tok !== tok || (e.name && e.name !== 'word')) return;
+    got = true;
+    let k = 0; for (let j = 0; j < starts.length; j++) { if (e.charIndex >= starts[j]) k = j; }
+    setWord(i + k);
+  };
+  u.onend = function () { if (P.tok === tok) { clearInterval(P.fb); finish(); } };
+  speechSynthesis.cancel(); speechSynthesis.speak(u);
+  P.fb = setTimeout(function () { if (!got && P.tok === tok) fallback(); }, 1200);
+}
+function setWord(k) {
+  const prev = document.getElementById('w' + S.wordIdx); if (prev) prev.classList.remove('on');
+  S.wordIdx = k;
+  const el = document.getElementById('w' + k); if (el) el.classList.add('on');
+}
+function fmt(s) { s = Math.max(0, Math.floor(s)); return Math.floor(s / 60) + ':' + String(s % 60).padStart(2, '0'); }
+function progress() {
+  const it = cur(); if (!it) return { pct: 0, left: '', right: '' };
+  if (it.type === 'book') { const n = it.words.length; return { pct: (S.wordIdx + (S.playing ? 1 : 0)) / n * 100, left: 'Word ' + (S.wordIdx + 1) + ' of ' + n, right: 'Sample' }; }
+  const e = elapsed();
+  if (it.kind === 'noise') return { pct: (e % 60) / 60 * 100, left: fmt(e), right: 'Plays until you stop' };
+  return { pct: Math.min(100, e / it.len * 100), left: fmt(e), right: fmt(it.len) };
+}
+function loop() {
+  cancelAnimationFrame(P.raf);
+  (function step() {
+    const pr = progress();
+    ['pbar', 'mbar'].forEach(function (id) { const el = document.getElementById(id); if (el) el.style.width = pr.pct + '%'; });
+    const pt = document.getElementById('ptime'); if (pt) pt.textContent = pr.left;
+    if (S.playing) P.raf = requestAnimationFrame(step);
+  })();
+}
+function open(id, autoplay) {
+  if (S.current !== id) { pause(); S.current = id; S.pos = 0; S.wordIdx = 0; P.logged = false; }
+  S.screen = 'player'; render();
+  if (autoplay && !S.playing) { play(); render(); }
+}
+
+/* ---------- piano ---------- */
+const WHITE = ['C4', 'D4', 'E4', 'F4', 'G4', 'A4', 'B4', 'C5', 'D5', 'E5'];
+const BLACK = [[0, 'C#4'], [1, 'D#4'], [3, 'F#4'], [4, 'G#4'], [5, 'A#4'], [7, 'C#5'], [8, 'D#5']];
+let pianoBus = null, metroTimer = 0, recTimer = 0;
+function pianoNote(name) {
+  if (!audio()) return;
+  if (!pianoBus) { pianoBus = ctx.createGain(); pianoBus.connect(master); }
+  pianoBus.gain.value = S.pvol / 100;
+  const m = N(name);
+  tone(m, now() + 0.005, 0.5, 1, pianoBus);
+  if (S.rec.state === 'rec') S.rec.notes.push({ m: m, t: now() - S.rec.t0, d: 0.5 });
+}
+function setMetro() {
+  clearInterval(metroTimer);
+  if (!S.metro || !audio()) return;
+  metroTimer = setInterval(function () {
+    const o = ctx.createOscillator(), g = ctx.createGain();
+    o.frequency.value = 1100; g.gain.setValueAtTime(0.0001, now()); g.gain.exponentialRampToValueAtTime(0.12 * S.pvol / 100 + 0.001, now() + 0.005); g.gain.exponentialRampToValueAtTime(0.0001, now() + 0.06);
+    o.connect(g); g.connect(master); o.start(); o.stop(now() + 0.08);
+  }, 60000 / S.bpm);
+}
+function recStatus() {
+  const el = document.getElementById('recStatus'); if (!el) return;
+  if (S.rec.state === 'rec') el.innerHTML = '<span class="recdot"></span><span style="color:var(--i)">Recording ' + fmt(now() - S.rec.t0) + ' · ' + S.rec.notes.length + ' notes. Press Stop when you finish.</span>';
+  else if (S.rec.state === 'play') el.textContent = 'Playing your recording';
+  else el.textContent = S.rec.notes.length ? 'Recorded ' + S.rec.notes.length + ' notes. Listen to it, then share it.' : 'Tap the keys to try. Press Record when you are ready.';
+}
+
+/* ---------- UI helpers ---------- */
+function cover(it, size) {
+  const fs = Math.round(size / 7.2);
+  if (it.type === 'book') return '<span class="cover" style="width:' + size + 'px;height:' + size + 'px;background:' + TINT[it.cat] + '" aria-hidden="true"><span class="ct" style="font-size:' + fs + 'px">' + esc(it.title) + '</span><span class="ca">' + esc(it.by.split(' ').slice(-1)[0]) + '</span></span>';
+  const icon = it.cat === 'Classical' ? 'piano' : it.cat === 'Community' ? 'note' : (it.noise === 'ocean' ? 'wave' : it.noise === 'wind' ? 'leaf' : 'wave');
+  return '<span class="cover art" style="width:' + size + 'px;height:' + size + 'px;background:' + TINT[it.cat] + '" aria-hidden="true">' + ic(icon, Math.round(size * 0.45), ' stroke-width="1.6"') + '</span>';
+}
+function sw(action, on, label, hint) {
+  return '<button type="button" class="sw" role="switch" aria-checked="' + on + '" data-a="' + action + '"><span class="meta"><span>' + label + '</span>' + (hint ? '<span class="small">' + hint + '</span>' : '') + '</span><span class="trk"><i></i></span></button>';
+}
+function chips(action, list, active) {
+  return '<div class="chips">' + list.map(function (x) { return '<button type="button" class="chip" data-a="' + action + '" data-v="' + esc(x) + '" aria-pressed="' + (x === active) + '">' + esc(x) + '</button>'; }).join('') + '</div>';
+}
+function seg(action, list, active, labels) {
+  return '<div class="seg" role="group">' + list.map(function (x, k) { return '<button type="button" data-a="' + action + '" data-v="' + x + '" aria-pressed="' + (x === active) + '">' + (labels ? labels[k] : x) + '</button>'; }).join('') + '</div>';
+}
+function itemRow(it, sub) {
+  return '<li class="row wv rv"><button type="button" class="rowbtn" data-a="open" data-v="' + it.id + '">' + cover(it, 56) + '<span class="meta"><span class="title">' + esc(it.title) + '</span><span class="small">' + esc(sub || it.by) + '</span></span></button>' +
+    '<button type="button" class="btn icon" data-a="play" data-v="' + it.id + '" aria-label="Play ' + esc(it.title) + '">' + ic('play', 22) + '</button></li>';
+}
+function back(action, label) { return '<button type="button" class="btn sm" data-a="' + action + '" style="align-self:flex-start">' + ic('back', 20) + '<span>' + label + '</span></button>'; }
+
+/* ---------- screens ---------- */
+const DOT = { Recommended: '#5B8DEF', Novels: '#8E7CF3', 'Non-fiction': '#3FB984', Poetry: '#E39B5B', Classical: '#5B8DEF', 'Nature sounds': '#3FB984', Community: '#8E7CF3' };
+const LIKE = {
+  'Classic stories': ['Warm, clear voice', 'Funny family moments'], Mystery: ['Clever puzzles', 'Short chapters'], 'Science fiction': ['Big ideas', 'Easy to follow'],
+  Adventure: ['Exciting but not scary', 'Lots of nature'], History: ['Real facts', 'Told like a story'], Science: ['Explains things simply', 'Good for curious minds'],
+  Poetry: ['Short to listen to', 'Calm rhythm'], 'Calm piano': ['Good for focus', 'Gentle melody'], Ambient: ['Good for resting', 'Very slow'],
+  'Nature sounds': ['Helps with sleep', 'Blocks out noise'], Community: ['Made by someone like you', 'Short and kind']
+};
+function know(it) {
+  if (it.type === 'book') return ['One calm voice', 'No music behind the voice', 'Words light up as you listen'];
+  if (it.cat === 'Community') return ['Made by a listener', 'Short piano piece', 'Soft volume'];
+  if (it.kind === 'noise') return ['Plays until you stop', 'Steady sound, no surprises'];
+  if (it.genre === 'Ambient') return ['Very slow', 'Same volume all the way'];
+  return ['Soft and slow', 'No sudden loud parts'];
+}
+function rating(id) { let h = 7; for (let i = 0; i < id.length; i++) h = (h * 31 + id.charCodeAt(i)) % 997; return { r: (4.2 + (h % 8) / 10).toFixed(1), n: 40 + h % 160 }; }
+function pola(it, size, r, cap, sub) {
+  return '<span class="pola" style="--r:' + r + 'deg;--w:' + size + 'px">' + cover(it, size) + '<span class="cap">' + esc(cap) + (sub ? '<small>' + esc(sub) + '</small>' : '') + '</span></span>';
+}
+function dateLine() {
+  const d = new Date(), n = d.getDate(), m = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'][d.getMonth()];
+  const o = (n % 10 === 1 && n !== 11) ? 'st' : (n % 10 === 2 && n !== 12) ? 'nd' : (n % 10 === 3 && n !== 13) ? 'rd' : 'th';
+  return n + o + ' ' + m;
+}
+function topbar() {
+  const me = S.tab === 'me';
+  return '<header class="topbar"><span class="hand date">' + dateLine() + '</span><span style="display:flex;gap:8px;align-items:center">' +
+    '<button type="button" class="btn icon ghost" data-a="gosearch" aria-label="Search">' + ic('search', 21) + '</button>' +
+    (me ? '<button type="button" class="btn icon ghost" data-a="settings" aria-label="Settings">' + ic('gear', 22) + '</button>'
+      : '<button type="button" class="avs" data-a="tab" data-v="me" aria-label="Me">' + esc(initials()) + '</button>') + '</span></header>';
+}
+function initials() { return who().split(/\s+/).map(function (w) { return w[0]; }).join('').slice(0, 2).toUpperCase(); }
+function greet() { const h = new Date().getHours(); return h < 12 ? 'good morning' : h < 18 ? 'good afternoon' : 'good evening'; }
+function eq() { return '<span class="eq" aria-hidden="true"><i></i><i></i><i></i></span>'; }
+function sect(t, right) { return '<div class="between"><h2 class="hand sect">' + t + '</h2>' + (right || '') + '</div>'; }
+
+/* first open: intro (3), account, caregiver PIN, interests */
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[A-Za-z]{2,}$/;
+function vWelcome() {
+  const step = S.ob;
+  if (step <= 2) {
+    const pages = [
+      { art: '<div class="collage" style="width:100%" aria-hidden="true">' + pola(ITEMS.pride, 104, -7, 'a classic, read aloud') + pola(ITEMS.gymno, 112, 4, 'for quiet evenings') + pola(ITEMS.rain, 96, -2, 'rain, on repeat') + '</div>',
+        hi: 'welcome', t: 'Books and music, in one calm place.', p: 'Listen to classic books read aloud, with words that light up as you go. Or relax with piano and nature sounds.' },
+      { art: '<div class="mockai" aria-hidden="true"><div class="r"><span class="aiicon">' + ic('spark', 26) + '</span><b class="grad" style="font-size:1.05rem">Picked for you</b></div>' +
+          [ITEMS.gymno, ITEMS.holmes, ITEMS.ocean].map(function (it, k) { return '<div class="r">' + cover(it, 40) + '<span style="flex:1;display:flex;flex-direction:column;gap:6px"><span class="ln" style="width:' + [80, 64, 72][k] + '%"></span><span class="ln" style="width:' + [50, 40, 56][k] + '%;opacity:.6"></span></span></div>'; }).join('') + '</div>',
+        hi: 'it gets to know you', t: 'Suggestions that fit you.', p: 'The app learns from what you finish and skip. Tell it what you like, and the picks get better.' },
+      { art: '<div class="mockkeys" aria-hidden="true"><i></i><i class="k"></i><i></i><i></i><i class="k"></i><i></i><i></i><div class="mockpost"><span class="small" style="font-weight:800;color:var(--i)">Morning Steps</span><span class="small">Mira · Calm piano</span><span class="small" style="display:flex;align-items:center;gap:4px;color:#E5484D">' + ic('heart', 14, ' fill="currentColor"') + '12</span></div></div>',
+        hi: 'make something', t: 'Play, record and share.', p: 'Play the piano, record a short piece and share it with the community. Only kind replies are allowed.' }
+    ];
+    const pg = pages[step];
+    return '<main class="main ob intro" id="intro"><div class="introtop">' + (step < 2 ? '<button type="button" class="link" data-a="obskip" style="text-decoration:none">Skip</button>' : '') + '</div>' +
+      '<div class="introart">' + pg.art + '</div>' +
+      '<div class="stack" style="gap:8px"><span class="hand hi">' + pg.hi + '</span><h1 class="big">' + pg.t + '</h1><p class="sub">' + pg.p + '</p></div>' +
+      '<div class="introfoot"><span class="introdots" aria-label="Page ' + (step + 1) + ' of 3">' + [0, 1, 2].map(function (k) { return '<i class="' + (k === step ? 'on' : '') + '"></i>'; }).join('') + '</span>' +
+      (step < 2 ? '<button type="button" class="nextbtn" data-a="obnext" aria-label="Next">' + ic('chev', 28) + '</button>'
+        : '<button type="button" class="btn primary big" data-a="obnext" style="padding:0 26px"><span>Get started</span>' + ic('chev', 20) + '</button>') + '</div></main>';
+  }
+  const sstep = step - 3;
+  const pr = '<div class="obbar" style="grid-template-columns:1fr 1fr 1fr" aria-label="Step ' + (sstep + 1) + ' of 3">' + [0, 1, 2].map(function (k) { return '<i class="' + (k <= sstep ? 'on' : '') + '"></i>'; }).join('') + '</div>';
+  const backBtn = '<button type="button" class="btn sm ghost" data-a="obback" style="align-self:flex-start;margin-left:-10px">' + ic('back', 20) + '<span>Back</span></button>';
+  if (step === 3) {
+    const E = S.obErr || {};
+    const errP = function (id, m) { return m ? '<p class="err" id="' + id + '">' + m + '</p>' : ''; };
+    return '<main class="main ob" id="scroller">' + pr + backBtn +
+      '<div class="stack" style="gap:8px"><span class="hand hi">step 1 of 3</span><h1 class="big">Create your account</h1><p class="sub">This keeps your favourites and picks safe.</p></div>' +
+      '<div class="stack" style="gap:7px"><label class="flabel" for="nm">Your name</label><input id="nm" class="field' + (E.name ? ' bad' : '') + '" type="text" autocomplete="off" placeholder="First name or nickname" value="' + esc(S.name) + '" data-in="name">' + errP('nmErr', E.name) + '</div>' +
+      '<div class="stack" style="gap:7px"><label class="flabel" for="em">Email</label><input id="em" class="field' + (E.email ? ' bad' : '') + '" type="email" inputmode="email" autocomplete="off" autocapitalize="off" placeholder="name@example.com" value="' + esc(S.email) + '" data-in="email">' + errP('emErr', E.email) + '</div>' +
+      '<div class="stack" style="gap:9px"><span class="flabel">Age group</span><div class="chips">' + ['18–20', '21–24', '25–30', '31+'].map(function (a) { return '<button type="button" class="chip" data-a="obage" data-v="' + a + '" aria-pressed="' + (S.age === a) + '">' + a + '</button>'; }).join('') + '</div>' + errP('agErr', E.age) + '</div>' +
+      '<div class="obfoot"><button type="button" class="btn primary block big" data-a="obnext"><span>Continue</span>' + ic('chev', 20) + '</button>' +
+      '<p class="small" style="text-align:center">This app is made for adults aged 18 and over.</p></div></main>';
+  }
+  if (step === 4) {
+    const confirm = !!S.obPin1, n = S.obPin.length;
+    let dots = '<div class="dots' + (S.obPinErr ? ' shake' : '') + '" role="img" aria-label="' + n + ' of 4 numbers entered">';
+    for (let i = 0; i < 4; i++) dots += '<i class="' + (i < n ? 'f' : '') + '"></i>';
+    dots += '</div>';
+    let keys = '<div class="keypad">';
+    ['1', '2', '3', '4', '5', '6', '7', '8', '9'].forEach(function (d) { keys += '<button type="button" data-a="obpin" data-v="' + d + '">' + d + '</button>'; });
+    keys += '<span></span><button type="button" data-a="obpin" data-v="0">0</button><button type="button" data-a="obpindel" aria-label="Delete the last number">' + ic('back', 26) + '</button></div>';
+    return '<main class="main ob">' + pr + backBtn +
+      '<div class="stack" style="gap:8px"><span class="hand hi">step 2 of 3</span><h1 class="big">' + (confirm ? 'Enter it again' : 'Set a caregiver PIN') + '</h1><p class="sub">' +
+      (confirm ? 'Type the same 4 numbers to confirm.' : 'Your parent or support worker uses this 4-number PIN to open the caregiver area.') + '</p></div>' +
+      dots + (S.obPinErr ? '<p class="err" style="justify-content:center">' + S.obPinErr + '</p>' : '<p class="small" style="text-align:center">' + (confirm ? 'Almost done' : 'Choose numbers that are easy to remember') + '</p>') + keys + '</main>';
+  }
+  const n = S.tmpInt.size;
+  const grp = function (title, list) { return '<div class="stack" style="gap:10px"><span class="eyebrow">' + title + '</span><div class="chips">' + list.map(function (g, k) { return '<button type="button" class="chip pick" style="--d:' + k + '" data-a="inttoggle" data-v="' + g + '" aria-pressed="' + S.tmpInt.has(g) + '">' + ic(GI[g], 18) + g + '</button>'; }).join('') + '</div></div>'; };
+  return '<main class="main ob" id="scroller">' + pr + backBtn +
+    '<div class="stack" style="gap:8px"><span class="hand hi">step 3 of 3 · nice to meet you, ' + esc(who()) + '</span><h1 class="big">What are you into?</h1><p class="sub">Pick a few. Home will suggest things from these and from what you listen to.</p></div>' +
+    grp('Music', ['Calm piano', 'Ambient', 'Nature sounds']) + grp('Books', ['Classic stories', 'Mystery', 'Science fiction', 'Adventure', 'History', 'Science', 'Poetry']) +
+    '<div class="obfoot"><button type="button" class="btn primary block big" data-a="obdone"><span>' + (n ? 'Done · ' + n + ' picked' : 'Skip for now') + '</span>' + ic('chev', 20) + '</button></div></main>';
+}
+
+/* picks feedback sheet */
+function vFb() {
+  return '<div class="sheet-back" data-a="fbclose"><div class="sheet" data-a="noop" role="dialog" aria-modal="true" aria-labelledby="fbT"><span class="grab" aria-hidden="true"></span>' +
+    '<div class="stack" style="gap:4px"><span class="hand hi">thanks for telling us</span><h2 id="fbT" class="big2">What\'s not right?</h2><p class="sub">Choose one. We\'ll find new picks for you.</p></div>' +
+    '<button type="button" class="opt" data-a="fbreason" data-v="mood"><span class="av" style="background:linear-gradient(135deg,#9FB7F5,#C3B5F7)">' + ic('moon', 22) + '</span><span class="meta"><span class="title">I\'m not in the mood for this</span><span class="small">Show me something gentler today</span></span></button>' +
+    '<button type="button" class="opt" data-a="fbreason" data-v="interest"><span class="av" style="background:linear-gradient(135deg,#8DD3C7,#9FC4F5)">' + ic('compass', 22) + '</span><span class="meta"><span class="title">It\'s not what I\'m interested in</span><span class="small">Show me different kinds of things</span></span></button>' +
+    '<button type="button" class="link" data-a="fbclose" style="align-self:center">Cancel</button></div></div>';
+}
+
+/* first-time tour */
+const TOUR = [
+  { sel: '.ai-card', t: 'Picked for you', p: 'Suggestions based on what you play. Tap it to see them, and tell us if you like them.' },
+  { sel: '.nav [data-v="library"]', t: 'Library', p: 'All books and music, sorted by type. You can also search here.' },
+  { sel: '.nav [data-v="create"]', t: 'Create', p: 'Play the piano, record a piece and share it with the community.' },
+  { sel: '.nav [data-v="me"]', t: 'Me', p: 'Your interests, settings, and the caregiver area.' }
+];
+function drawTour() {
+  const old = document.getElementById('tour'); if (old) old.remove();
+  if (S.tour === null || S.screen !== 'tabs' || S.tab !== 'home') return;
+  const st = TOUR[S.tour], app = document.getElementById('app'), el = app.querySelector(st.sel);
+  if (!el) return;
+  if (st.sel === '.ai-card') el.scrollIntoView({ block: 'center' });
+  const sc = app.getBoundingClientRect().width / app.offsetWidth || 1;
+  const ar = app.getBoundingClientRect(), r = el.getBoundingClientRect();
+  const x = (r.left - ar.left) / sc - 6, y = (r.top - ar.top) / sc - 6, w = r.width / sc + 12, h = r.height / sc + 12;
+  const below = y < app.offsetHeight / 2;
+  const t = document.createElement('div'); t.id = 'tour'; t.setAttribute('role', 'dialog'); t.setAttribute('aria-label', 'App tour');
+  t.innerHTML = '<div class="spot" style="left:' + x + 'px;top:' + y + 'px;width:' + w + 'px;height:' + h + 'px"></div>' +
+    '<div class="bub" style="' + (below ? 'top:' + (y + h + 14) : 'top:' + Math.max(16, y - 196)) + 'px"><b>' + st.t + '</b><p>' + st.p + '</p>' +
+    '<div class="row"><button type="button" class="link" data-a="tourskip" style="text-decoration:none;padding-left:0">Skip tour</button>' +
+    '<span class="tdots">' + TOUR.map(function (_, k) { return '<i class="' + (k === S.tour ? 'on' : '') + '"></i>'; }).join('') + '</span>' +
+    '<button type="button" class="btn primary sm" data-a="tournext"><span>' + (S.tour === TOUR.length - 1 ? 'Done' : 'Next') + '</span>' + ic('chev', 18) + '</button></div></div>';
+  app.appendChild(t);
+}
+
+function vHome() {
+  const it = cur(), picks = candidates(false);
+  let h = '<main class="main" id="scroller"><header class="stack" style="gap:6px"><span class="hand hi">' + greet() + ', ' + esc(who()) + '</span><h1 class="big">' + (it ? 'Pick up where you left off.' : 'What would you like to hear today?') + '</h1></header>';
+  if (it) {
+    const pr = progress();
+    h += '<section class="card now"><button type="button" class="nowbtn" data-a="open" data-v="' + it.id + '">' + pola(it, 92, -4, it.type === 'book' ? 'reading now' : 'on now') +
+      '<span class="meta" style="gap:6px"><span class="eyebrow" style="display:flex;align-items:center;gap:8px">' + (S.playing ? eq() + 'Now playing' : 'Continue') + '</span><span class="title" style="font-size:1.12rem">' + esc(it.title) + '</span><span class="small">' + esc(it.by) + '</span>' +
+      '<span class="bar" style="margin-top:6px"><i style="width:' + pr.pct + '%"></i></span><span class="small">' + pr.left + '</span></span></button></section>';
+  }
+  const favs = Array.from(S.favs).map(function (id) { return ITEMS[id]; }).filter(Boolean);
+  h += '<section class="stack">' + sect('Favourites', '<span class="small">' + favs.length + ' saved</span>');
+  h += favs.length ? '<div class="hscroll pol">' + favs.map(function (f, k) { return '<button type="button" class="wv rv" data-a="play" data-v="' + f.id + '" aria-label="Play ' + esc(f.title) + '">' + pola(f, 108, [-3, 2.5, -1.5, 3][k % 4], f.title, f.by) + '</button>'; }).join('') + '</div>' : '<p class="empty hand">Nothing saved yet.</p><p class="small" style="text-align:center">Tap the heart in the player to keep something here.</p>';
+  h += '</section>';
+  h += '<section class="card ai-card"><button type="button" class="pickhead" data-a="picks" aria-expanded="' + S.pickOpen + '"><span class="aiicon">' + ic('spark', 28) + '</span>' +
+    '<span class="meta"><span class="title grad" style="font-size:1.15rem">Picked for you</span><span class="small">' + (picks.length ? picks.length + ' picks from what you finish and skip' : 'Listen to a few things first') + '</span></span>' +
+    (S.pickOpen ? '' : '<span class="stackc" aria-hidden="true">' + picks.slice(0, 3).map(function (p) { return cover(p.it, 34); }).join('') + '</span>') +
+    '<span class="chevr" style="transform:rotate(' + (S.pickOpen ? 90 : 0) + 'deg)">' + ic('chev', 20) + '</span></button>';
+  if (S.pickOpen && picks.length) {
+    h += '<ul class="list">' + picks.map(function (p, k) {
+      return '<li class="row wv' + (S.pickAnim ? ' unfold' : '') + '" style="--d:' + k + '"><button type="button" class="rowbtn" data-a="play" data-v="' + p.it.id + '">' + cover(p.it, 52) + '<span class="meta"><span class="title">' + esc(p.it.title) + '</span><span class="small">' + esc(p.reason) + '</span></span></button>' +
+        '<button type="button" class="btn icon" data-a="notforme" data-v="' + p.it.id + '" aria-label="Not for me: ' + esc(p.it.title) + '">' + ic('hide', 20) + '</button></li>';
+    }).join('') + '</ul>' + (S.pickNote ? '<p class="small" style="display:flex;align-items:center;gap:6px">' + ic('spark', 15) + esc(S.pickNote) + '</p>' : '') +
+      (S.pickFb === 'liked' ? '<div class="fb done">' + ic('check', 18, ' stroke-width="2.6"') + 'Thanks! We\'ll suggest more like these.</div>'
+        : '<div class="fb"><span class="q">Do you like today\'s picks?</span><span class="btns"><button type="button" class="btn sm" data-a="fblike" aria-label="Yes, I like them">' + ic('heart', 17) + '<span>Yes</span></button><button type="button" class="btn sm" data-a="fbno" aria-label="No, not really">' + ic('x', 17) + '<span>No</span></button></span></div>');
+  }
+  h += '</section>';
+  if (S.community) {
+    const posts = S.posts.slice(0, 4);
+    h += '<section class="stack">' + sect('From the community', '<button type="button" class="link" data-a="gocommunity">See all</button>') +
+      '<div class="hscroll">' + posts.map(function (p) {
+        return '<button type="button" class="pcard wv rv" data-a="play" data-v="' + p.id + '"><span class="hand who">' + esc(p.author) + '</span><span class="title">' + esc(p.title) + '</span><span class="small" style="display:flex;align-items:center;gap:6px"><i class="dt" style="background:' + DOT.Community + '"></i>' + esc(p.genre) + '</span><span class="small" style="display:flex;align-items:center;gap:5px;margin-top:auto">' + ic('heart', 15) + p.likes + '</span></button>';
+      }).join('') + '</div></section>';
+  }
+  return h + '</main>';
+}
+function chipsDot(action, list, active) {
+  return '<div class="chips">' + list.map(function (x) { return '<button type="button" class="chip" data-a="' + action + '" data-v="' + esc(x) + '" aria-pressed="' + (x === active) + '"><i class="dt" style="background:' + DOT[x] + '"></i>' + esc(x) + '</button>'; }).join('') + '</div>';
+}
+function libResults() {
+  const key = S.q.trim().toLowerCase();
+  if (key) {
+    const found = Object.values(ITEMS).filter(function (it) { return (it.title + ' ' + it.by + ' ' + it.genre).toLowerCase().indexOf(key) >= 0 && (it.cat !== 'Community' || S.community); });
+    return '<p class="small" role="status">' + (found.length ? found.length + (found.length === 1 ? ' result' : ' results') : '') + '</p>' + (found.length ? '' : '<p class="empty hand">Nothing found. Try another word.</p>') + '<ul class="list">' + found.map(function (it) { return itemRow(it, it.by + ' · ' + it.genre); }).join('') + '</ul>';
+  }
+  let h = seg('libtab', ['books', 'music'], S.libTab, ['Books', 'Music']);
+  if (S.libTab === 'books') {
+    h += chipsDot('bookcat', ['Recommended', 'Novels', 'Non-fiction', 'Poetry'], S.bookCat);
+    if (S.bookCat === 'Recommended') h += '<p class="small">Classic books many young adults enjoy.</p>';
+    h += '<ul class="list">' + Object.values(ITEMS).filter(function (it) { return it.type === 'book' && it.cat === S.bookCat; }).map(function (it) { return itemRow(it, it.by + ' · ' + it.genre); }).join('') + '</ul>';
+  } else {
+    h += chipsDot('musiccat', ['Classical', 'Nature sounds', 'Community'], S.musicCat);
+    if (S.musicCat === 'Classical') h += '<p class="small">Music comes from YouTube. The app learns what you like from what you play and skip.</p>';
+    if (S.musicCat === 'Community' && !S.community) h += '<p class="empty hand">The community is turned off.</p>';
+    else h += '<ul class="list">' + Object.values(ITEMS).filter(function (it) { return it.type === 'music' && it.cat === S.musicCat; }).map(function (it) { return itemRow(it, it.cat === 'Community' ? 'by ' + it.by : it.src + ' · ' + it.by); }).join('') + '</ul>';
+  }
+  return h;
+}
+function vLibrary() {
+  const nb = Object.values(ITEMS).filter(function (i) { return i.type === 'book'; }).length, nm = Object.values(ITEMS).length - nb;
+  return '<main class="main" id="scroller"><header class="stack" style="gap:6px"><span class="hand hi">everything in one place</span><h1 class="big">Library</h1></header>' +
+    '<div class="stats"><span><b>' + nb + '</b>books</span><span><b>' + nm + '</b>music & sounds</span><span><b>' + S.favs.size + '</b>favourites</span></div>' +
+    '<div style="position:relative"><span style="position:absolute;left:16px;top:15px;color:var(--m)">' + ic('search', 22) + '</span><input id="q" class="field pill" type="search" autocomplete="off" placeholder="Search title, writer or type" aria-label="Search books and music" value="' + esc(S.q) + '" data-in="q" style="padding-left:48px"></div>' +
+    '<div class="stack" id="libBody" style="gap:14px">' + libResults() + '</div></main>';
+}
+function recStep() { const r = S.rec; if (r.state === 'rec' || !r.notes.length) return 1; return r.heard ? 3 : 2; }
+function vPiano() {
+  let keys = '<div class="piano" id="piano" role="group" aria-label="Piano keys">';
+  WHITE.forEach(function (n) { keys += '<button type="button" class="wk" data-key="' + n + '" aria-label="' + n + '">' + n.replace(/\d/, '') + '</button>'; });
+  BLACK.forEach(function (b) { keys += '<button type="button" class="bk" data-key="' + b[1] + '" aria-label="' + b[1] + '" style="left:' + ((b[0] + 1) * 10) + '%"></button>'; });
+  keys += '</div>';
+  const r = S.rec.state, st = recStep(), has = S.rec.notes.length > 0;
+  const steps = '<ol class="steps" aria-label="How to share a piece">' + ['Record', 'Listen', 'Publish'].map(function (t, k) { const n = k + 1; return '<li class="' + (n === st ? 'on' : n < st ? 'done' : '') + '"><i>' + (n < st ? ic('check', 13, ' stroke-width="3"') : n) + '</i>' + t + '</li>'; }).join('') + '</ol>';
+  let h = steps + '<div class="card" style="padding:12px' + (r === 'rec' ? ';box-shadow:0 0 0 2px #E5484D,0 10px 30px rgba(229,72,77,.18)' : '') + '"><p class="small" id="recStatus" aria-live="polite" style="display:flex;align-items:center;gap:8px"></p>' + keys + '</div>' +
+    '<div style="display:grid;grid-template-columns:repeat(' + (has && r === 'idle' ? 4 : 3) + ',minmax(0,1fr));gap:8px">' +
+    (r === 'rec' ? '<button type="button" class="btn dark" data-a="recstop">' + ic('stop', 20) + '<span>Stop</span></button>' : '<button type="button" class="btn" data-a="recstart"><span style="color:#E5484D;display:flex">' + ic('rec', 20) + '</span><span>' + (has ? 'Again' : 'Record') + '</span></button>') +
+    (r === 'play' ? '<button type="button" class="btn" data-a="recpause">' + ic('pause', 20) + '<span>Stop</span></button>' : '<button type="button" class="btn" data-a="recplay">' + ic('play', 20) + '<span>Listen</span></button>') +
+    (has && r === 'idle' ? '<button type="button" class="btn primary" data-a="pubopen">' + ic('note', 20) + '<span>Share</span></button>' : '') +
+    '<button type="button" class="btn" data-a="recclear">' + ic('x', 20) + '<span>Clear</span></button></div>' +
+    sw('metro', S.metro, 'Metronome', 'A soft click to keep time') +
+    (S.metro ? '<div class="stack" style="gap:6px"><span class="small">Speed (beats per minute)</span>' + chips('bpm', ['60', '80', '100'], String(S.bpm)) + '</div>' : '') +
+    '<div class="card" style="gap:4px"><label class="title" for="pvol">Piano volume</label><input id="pvol" type="range" min="10" max="100" step="5" value="' + S.pvol + '" data-in="pvol"></div>';
+  return h;
+}
+function vPub() {
+  const n = S.rec.notes.length, len = n ? S.rec.notes[n - 1].t + 1.2 : 0, playing = S.rec.state === 'play';
+  let h = '<div class="sheet-back" data-a="pubclose"><div class="sheet" data-a="noop" role="dialog" aria-modal="true" aria-labelledby="pubT"><span class="grab" aria-hidden="true"></span>' +
+    '<div class="stack" style="gap:4px"><span class="hand hi">nice one!</span><h2 id="pubT" class="big2">Share your piece</h2><p class="small">' + n + ' notes · ' + fmt(len) + '</p></div>' +
+    '<button type="button" class="btn block" data-a="' + (playing ? 'recpause' : 'recplay') + '">' + ic(playing ? 'pause' : 'play', 20) + '<span>' + (playing ? 'Stop' : 'Listen first') + '</span></button>';
+  if (S.community) {
+    h += '<div class="stack" style="gap:6px"><label class="title" for="piece">Give it a name</label><input id="piece" class="field" type="text" autocomplete="off" placeholder="My first piece" value="' + esc(S.pieceName) + '" data-in="piece"></div>' +
+      '<p class="small">Everyone in the community can play it. Only kind replies are allowed.</p>' +
+      '<button type="button" class="btn primary block big" data-a="publish">' + ic('note', 22) + '<span>Publish</span></button>' +
+      '<button type="button" class="link" data-a="pubclose" style="align-self:center">Not now</button>';
+  } else {
+    h += '<p class="empty hand">Sharing is turned off for now.</p><p class="small" style="text-align:center">Your caregiver can turn the community on.</p><button type="button" class="btn block" data-a="pubclose">Keep it for me</button>';
+  }
+  return h + '</div></div>';
+}
+function vCommunity() {
+  if (!S.community) return '<p class="empty hand">Community is off for now.</p><p class="small" style="text-align:center">Your caregiver has turned the community off.</p>';
+  const list = S.posts.filter(function (p) { return S.cfeed === 'foryou' || S.following.has(p.author) || p.author === 'You'; });
+  let h = seg('cfeed', ['foryou', 'following'], S.cfeed, ['For you', 'Following']) + '<p class="small">Only kind replies are allowed here, so everyone feels safe to share.</p>';
+  if (!list.length) h += '<p class="empty hand">Nobody here yet.</p><p class="small" style="text-align:center">Follow people to see their new pieces here.</p>';
+  h += list.map(function (p) {
+    const it = ITEMS[p.id], mine = p.author === 'You', following = S.following.has(p.author);
+    let a = '<article class="card wv rv' + (p.fresh ? ' fresh' : '') + '"><div class="between"><div style="display:flex;align-items:center;gap:10px"><span class="avs lg" aria-hidden="true">' + esc(p.author[0]) + '</span><span class="meta"><span class="hand who">' + esc(p.author) + (mine ? ' <span class="tag you">YOU</span>' : '') + '</span><span class="small">' + esc(p.genre) + ' · ' + esc(p.when) + '</span></span></div>' +
+      (mine ? '' : '<button type="button" class="btn sm" data-a="follow" data-v="' + esc(p.author) + '" aria-pressed="' + following + '">' + (following ? 'Following' : 'Follow') + '</button>') + '</div>' +
+      '<p class="title" style="font-size:1.2rem;letter-spacing:-.01em">' + esc(p.title) + '</p>' +
+      '<div style="display:flex;gap:8px;flex-wrap:wrap"><button type="button" class="btn sm dark" data-a="play" data-v="' + p.id + '">' + ic('play', 18) + '<span>Play ' + fmt(it.len) + '</span></button>' +
+      '<button type="button" class="btn sm" data-a="like" data-v="' + p.id + '" aria-pressed="' + p.liked + '" aria-label="Like, ' + p.likes + ' likes">' + ic('heart', 18, p.liked ? ' fill="currentColor"' : '') + '<span>' + p.likes + '</span></button>' +
+      '<button type="button" class="btn sm" data-a="replyopen" data-v="' + p.id + '" aria-expanded="' + (S.replyOpen === p.id) + '">' + ic('reply', 18) + '<span>Reply</span></button></div>';
+    if (S.replyOpen === p.id) a += '<div class="stack" style="gap:6px"><span class="small">Choose a kind reply</span><div class="chips">' + PRESETS.map(function (t) { return '<button type="button" class="chip" data-a="reply" data-v="' + p.id + '|' + esc(t) + '">' + esc(t) + '</button>'; }).join('') + '</div></div>';
+    if (p.replies.length) a += '<ul class="list replies">' + p.replies.map(function (r) { return '<li><span class="hand">' + esc(r.who) + '</span> ' + esc(r.text) + '</li>'; }).join('') + '</ul>';
+    return a + '</article>';
+  }).join('');
+  return h;
+}
+function vCreate() {
+  return '<main class="main" id="scroller"><header class="stack" style="gap:6px"><span class="hand hi">make something of your own</span><h1 class="big">Create</h1></header>' + seg('ctab', ['piano', 'community'], S.createTab, ['Piano', 'Community']) + (S.createTab === 'piano' ? vPiano() : vCommunity()) + '</main>';
+}
+const GI = { 'Calm piano': 'piano', 'Ambient': 'moon', 'Nature sounds': 'leaf', 'Classic stories': 'book', 'Mystery': 'search', 'Science fiction': 'rocket', 'Adventure': 'compass', 'History': 'clock', 'Science': 'flask', 'Poetry': 'pen' };
+function entry(action, icon, title, hint, dark) {
+  return '<button type="button" class="row wv" data-a="' + action + '" style="min-height:78px;padding:12px"><span class="av" style="width:48px;height:48px;border-radius:16px;' + (dark ? 'background:var(--i);box-shadow:none' : '') + '">' + ic(icon, 24) + '</span><span class="meta"><span class="title">' + title + '</span><span class="small">' + hint + '</span></span>' + ic('chev', 20) + '</button>';
+}
+function vMe() {
+  const fin = S.history.filter(function (h) { return h.ok && h.src === 'App'; }).length, mine = S.posts.filter(function (p) { return p.author === 'You'; }).length;
+  let h = '<main class="main" id="scroller"><header class="stack" style="gap:6px"><span class="hand hi">hi, ' + esc(who()) + '</span><h1 class="big">Your space</h1></header>';
+  h += '<section class="card" style="gap:16px"><div style="display:flex;align-items:center;gap:14px"><span class="av" style="width:72px;height:72px;font-size:1.8rem" aria-hidden="true">' + esc(initials()) + '</span>';
+  if (S.editName) h += '<div class="stack" style="flex:1;gap:8px"><label for="nn" class="title">Your name</label><input id="nn" class="field" type="text" autocomplete="off" value="' + esc(S.newName) + '" data-in="newname"></div></div><div style="display:grid;grid-template-columns:1fr 1fr;gap:8px"><button type="button" class="btn" data-a="namecancel">Cancel</button><button type="button" class="btn primary" data-a="namesave">Save</button></div>';
+  else h += '<span class="meta"><span class="title" style="font-size:1.35rem">' + esc(who()) + '</span><span class="small">Listener</span></span><button type="button" class="btn sm" data-a="nameedit">Edit</button></div>';
+  h += '<div class="stats"><span><b>' + fin + '</b>listened</span><span><b>' + mine + '</b>pieces shared</span><span><b>' + S.following.size + '</b>following</span></div></section>';
+  const ints = GENRES.filter(function (g) { return S.interests.has(g); });
+  h += '<section class="stack">' + sect('My interests', '<button type="button" class="btn sm" data-a="intedit">' + (ints.length ? 'Edit' : 'Add') + '</button>') +
+    (ints.length ? '<div class="chips">' + ints.map(function (g) { return '<span class="chip static">' + ic(GI[g], 18) + esc(g) + '</span>'; }).join('') + '</div><p class="small">Your picks on Home use these, together with what you listen to.</p>'
+      : '<p class="empty hand">Nothing picked yet.</p>') + '</section>';
+  h += entry('caregiver', 'lock', 'Caregiver area', 'For parents and support workers. Needs a PIN.', true) + '</main>';
+  return h;
+}
+function vSheet() {
+  const n = S.tmpInt.size;
+  return '<div class="sheet-back" data-a="intcancel"><div class="sheet" data-a="noop" role="dialog" aria-modal="true" aria-labelledby="sheetT"><span class="grab" aria-hidden="true"></span>' +
+    '<div class="stack" style="gap:4px"><span class="hand hi">change anytime</span><h2 id="sheetT" class="big2">What are you into?</h2><p class="sub">Pick as many as you like. Your Home picks use these.</p></div>' +
+    '<div class="chips">' + GENRES.map(function (g) { return '<button type="button" class="chip" data-a="inttoggle" data-v="' + g + '" aria-pressed="' + S.tmpInt.has(g) + '">' + ic(GI[g], 18) + g + '</button>'; }).join('') + '</div>' +
+    '<p class="small" role="status">' + n + ' selected</p>' +
+    '<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px"><button type="button" class="btn" data-a="intcancel">Cancel</button><button type="button" class="btn primary" data-a="intsave">Save</button></div></div></div>';
+}
+function vSettings() {
+  let h = '<main class="main" id="scroller">' + back('toMe', 'Me') + '<header class="stack" style="gap:6px"><span class="hand hi">make it feel right</span><h1 class="big">Settings</h1></header>';
+  if (S.locked) {
+    return h + '<div class="card" style="flex-direction:row;align-items:center;gap:10px">' + ic('lock', 24) + '<p class="sub" style="color:var(--i)">Your caregiver has locked these settings.</p></div>' +
+      '<div class="card"><p class="title">Reading speed: ' + S.speed + '</p><p class="title">Volume: ' + S.vol + '%</p><p class="title">Reduce motion: ' + (S.calm ? 'On' : 'Off') + '</p><p class="title">Text size: ' + S.textSize + '</p></div></main>';
+  }
+  h += '<section class="stack">' + sect('Listening') + '<div class="card" style="gap:4px"><div class="between"><label class="title" for="vol">Volume</label><span class="small" id="volv">' + S.vol + '%</span></div><input id="vol" type="range" min="0" max="' + S.cap + '" step="5" value="' + Math.min(S.vol, S.cap) + '" data-in="vol"><p class="small">Your caregiver set the highest volume to ' + S.cap + '%.</p></div>' +
+    '<div class="stack" style="gap:6px"><span class="title">Reading speed for books</span>' + chips('speed', ['Slow', 'Normal', 'Fast'], S.speed) + '</div></section>' +
+    '<section class="stack">' + sect('Sensory') + sw('calm', S.calm, 'Reduce motion', 'No moving effects') + sw('showwords', S.showWords, 'Show words while listening', 'Highlights each word of a book') +
+    '<div class="stack" style="gap:6px"><span class="title">Text size</span>' + chips('textsize', ['S', 'M', 'L'], S.textSize) + '</div></section>' +
+    '<section class="stack">' + sect('About') + '<button type="button" class="btn block" data-a="replay">' + ic('restart', 20) + '<span>Show first-time setup again</span></button></section></main>';
+  return h;
+}
+function vPin() {
+  let dots = '<div class="dots' + (S.pinErr ? ' shake' : '') + '" role="img" aria-label="' + S.pin.length + ' of 4 numbers entered">';
+  for (let i = 0; i < 4; i++) dots += '<i class="' + (i < S.pin.length ? 'f' : '') + '"></i>';
+  dots += '</div>';
+  let keys = '<div class="keypad">';
+  ['1', '2', '3', '4', '5', '6', '7', '8', '9'].forEach(function (d) { keys += '<button type="button" data-a="pin" data-v="' + d + '">' + d + '</button>'; });
+  keys += '<span></span><button type="button" data-a="pin" data-v="0">0</button><button type="button" data-a="pindel" aria-label="Delete the last number">' + ic('back', 26) + '</button></div>';
+  return '<main class="main">' + back('toMe', 'Back') + '<div style="display:flex;flex-direction:column;align-items:center;gap:8px;text-align:center"><span class="av" style="width:64px;height:64px;border-radius:20px;background:var(--i);color:#fff">' + ic('lock', 32) + '</span><span class="hand hi">for parents and support workers</span><h1 class="big" style="font-size:2rem">Caregiver area</h1><p class="sub">Enter your 4-number PIN.</p></div>' +
+    dots + (S.pinErr ? '<p class="err" style="justify-content:center" role="alert">Wrong PIN. Please try again.</p>' : '<p class="small" style="text-align:center">' + (S.userPin ? 'Use the PIN set when the account was created.' : 'Prototype: any 4 numbers work.') + '</p>') +
+    keys + (S.userPin ? '<button type="button" class="link" data-a="forgotpin" style="align-self:center">Forgot PIN?</button>' : '') + '</main>';
+}
+function vCaregiver() {
+  const ok = S.history.filter(function (h) { return h.ok; });
+  const counts = {}; ok.forEach(function (h) { counts[h.genre] = (counts[h.genre] || 0) + 1; });
+  const top = Object.keys(counts).sort(function (a, b) { return counts[b] - counts[a]; });
+  const skipped = Array.from(new Set(S.history.filter(function (h) { return !h.ok; }).map(function (h) { return h.genre; })));
+  const name = who();
+  let h = '<div class="hdr"><button type="button" class="btn sm" data-a="toMe">' + ic('back', 20) + '<span>Back to the app</span></button><div class="stack" style="gap:4px"><span class="hand hi" style="color:#C9D5E2">this week with ' + esc(name) + '</span><h1 class="big" style="font-size:2rem">Caregiver area</h1></div>' +
+    '<div class="stats light"><span><b>' + ok.length + '</b>finished</span><span><b>' + (S.history.length - ok.length) + '</b>skipped</span><span><b>' + top.length + '</b>kinds liked</span></div></div><main class="main" id="scroller">';
+  h += '<section class="card">' + sect('What ' + esc(name) + ' finished') +
+    top.slice(0, 4).map(function (g) { const pct = Math.round(counts[g] / ok.length * 100); return '<div class="gbar"><span>' + esc(g) + '</span><span class="bar" role="img" aria-label="' + pct + ' percent"><i style="width:' + pct + '%"></i></span><span>' + pct + '%</span></div>'; }).join('') +
+    (skipped.length ? '<p class="small">Often skipped: ' + esc(skipped.join(', ')) + '</p>' : '') + '</section>';
+  h += '<section class="stack"><h2 style="display:flex;align-items:center;gap:8px"><span class="aiicon">' + ic('spark', 22) + '</span><span class="grad">AI suggestions for you</span></h2>';
+  if (top.length >= 2) {
+    h += '<div class="card ai-card"><p class="title">' + esc(name) + ' usually finishes ' + esc(top[0].toLowerCase()) + ' and ' + esc(top[1].toLowerCase()) + '.</p>' +
+      (S.sugg1 ? '<p class="small" role="status">' + S.sugg1 + '</p>' : '<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px"><button type="button" class="btn sm primary" data-a="sugg1" data-v="yes">Suggest more</button><button type="button" class="btn sm" data-a="sugg1" data-v="no">Not now</button></div>') + '</div>';
+  }
+  if (skipped.length) {
+    h += '<div class="card ai-card"><p class="title">' + esc(name) + ' skipped ' + esc(listText(skipped, 'and')) + ' music this week. It may be too loud or too fast.</p>' +
+      (S.sugg2 ? '<p class="small" role="status">' + S.sugg2 + '</p>' : '<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px"><button type="button" class="btn sm primary" data-a="sugg2" data-v="yes">Stop suggesting it</button><button type="button" class="btn sm" data-a="sugg2" data-v="no">Keep it</button></div>') + '</div>';
+  }
+  h += '</section><section class="card">' + sect('On ' + esc(name) + '\'s Home now') + '<p class="small">Hide anything you don\'t want ' + esc(name) + ' to see.</p><ul class="list">' +
+    candidates(true).map(function (p) {
+      const hid = S.hidden.has(p.it.id);
+      return '<li class="row"><span class="meta"><span class="title">' + esc(p.it.title) + '</span><span class="small">' + esc(p.reason) + '</span></span><button type="button" class="btn sm" data-a="hideitem" data-v="' + p.it.id + '" aria-pressed="' + hid + '">' + (hid ? 'Hidden' : 'Hide') + '</button></li>';
+    }).join('') + '</ul></section>';
+  h += '<section class="card">' + sect('Listening history') + '<ul class="list" style="gap:0">' +
+    S.history.slice(0, 10).map(function (x, k) { return '<li style="display:flex;justify-content:space-between;gap:10px;padding:10px 0;' + (k ? 'border-top:1px solid var(--line)' : '') + '"><span class="meta"><span class="title" style="font-size:.95rem">' + esc(x.title) + '</span><span class="small">' + esc(x.genre) + ' · ' + esc(x.result) + '</span></span><span class="meta" style="flex:0 0 auto;align-items:flex-end"><span class="tag">' + esc(x.src) + '</span><span class="small">' + esc(x.when) + '</span></span></li>'; }).join('') + '</ul></section>';
+  h += '<section class="stack">' + sect('Controls') + sw('lock', S.locked, 'Lock settings', S.locked ? name + ' cannot change settings.' : name + ' can change settings.') +
+    sw('community', S.community, 'Community', S.community ? 'Can share pieces and see others.' : 'Turned off.') +
+    '<div class="card" style="gap:4px"><div class="between"><label class="title" for="cap">Highest volume</label><span class="small" id="capv">' + S.cap + '%</span></div><input id="cap" type="range" min="40" max="100" step="5" value="' + S.cap + '" data-in="cap"></div></section></main>';
+  return h;
+}
+function vPlayer() {
+  const it = cur(), pr = progress(), fav = S.favs.has(it.id), rt = rating(it.id), likes = LIKE[it.cat === 'Community' ? 'Community' : it.genre] || LIKE['Calm piano'];
+  let h = '<main class="main" id="scroller"><div class="glow" style="background:' + TINT[it.cat] + '"></div>' + back('closeplayer', 'Back') +
+    '<div style="display:flex;justify-content:center;padding:8px 0 4px">' + pola(it, it.type === 'book' ? 176 : 184, -2.5, it.type === 'book' ? 'read aloud for you' : it.cat === 'Community' ? 'made by ' + it.by : 'from ' + (it.src || 'the app').replace('From ', '')) + '</div>' +
+    '<div class="stack" style="gap:6px"><span class="eyebrow" style="display:flex;align-items:center;gap:8px">' + (S.playing ? eq() : '') + esc(it.type === 'book' ? 'Audiobook · ' + it.genre : it.genre) + '</span><h1 class="big" style="font-size:1.9rem">' + esc(it.title) + '</h1><p class="sub">' + esc(it.by) + '</p>' +
+    '<div class="rate"><b>' + rt.r + '</b><span><span class="stars" aria-hidden="true">★★★★★</span><span class="small">' + rt.n + ' listeners</span></span></div></div>';
+  if (it.type === 'book' && S.showWords) h += '<div class="words" aria-label="Story words">' + it.words.map(function (w, k) { return '<span id="w' + k + '" class="' + (k === S.wordIdx && S.playing ? 'on' : '') + '">' + esc(w) + '</span>'; }).join('') + '</div>';
+  h += '<div class="stack" style="gap:6px"><div class="bar"><i id="pbar" style="width:' + pr.pct + '%"></i></div><div class="between small"><span id="ptime">' + pr.left + '</span><span>' + pr.right + '</span></div></div>' +
+    '<div style="display:flex;align-items:center;justify-content:center;gap:18px">' +
+    '<button type="button" class="btn icon" data-a="restart" aria-label="Start again" style="width:56px;min-height:56px">' + ic('restart', 26) + '</button>' +
+    '<button type="button" class="btn primary" data-a="toggle" aria-label="' + (S.playing ? 'Pause' : 'Play') + '" style="width:84px;min-height:84px;border-radius:50%">' + ic(S.playing ? 'pause' : 'play', 40) + '</button>' +
+    '<button type="button" class="btn icon" data-a="fav" data-v="' + it.id + '" aria-pressed="' + fav + '" aria-label="Favourite" style="width:56px;min-height:56px">' + ic('heart', 26, fav ? ' fill="currentColor"' : '') + '</button></div>';
+  h += '<section class="card summary"><span class="eyebrow" style="display:flex;align-items:center;gap:6px"><span class="aiicon">' + ic('spark', 16) + '</span>AI summary</span><p class="hand sect" style="font-size:1.45rem">Before you listen</p>' +
+    '<div class="cols"><div><span class="eyebrow" style="color:#2E9E6A">Listeners like</span><ul>' + likes.map(function (x) { return '<li>' + esc(x) + '</li>'; }).join('') + '</ul></div>' +
+    '<div><span class="eyebrow" style="color:#5B6BEF">Good to know</span><ul>' + know(it).map(function (x) { return '<li>' + esc(x) + '</li>'; }).join('') + '</ul></div></div></section>';
+  if (!S.locked) h += '<div class="card" style="gap:4px"><div class="between"><label class="title" for="vol">Volume</label><span class="small" id="volv">' + S.vol + '%</span></div><input id="vol" type="range" min="0" max="' + S.cap + '" step="5" value="' + Math.min(S.vol, S.cap) + '" data-in="vol"></div>';
+  if (it.type === 'book' && !S.locked) h += '<div class="stack" style="gap:6px"><span class="title">Reading speed</span>' + chips('speed', ['Slow', 'Normal', 'Fast'], S.speed) + '</div>';
+  if (it.by !== 'You') h += '<button type="button" class="btn block" data-a="notforme" data-v="' + it.id + '">' + ic('hide', 22) + '<span>Not for me</span></button><p class="small" style="text-align:center">This helps the app suggest better things.</p>';
+  return h + '</main>';
+}
+function vNav() {
+  const tabs = [['home', 'Home', 'home'], ['library', 'Library', 'book'], ['create', 'Create', 'piano'], ['me', 'Me', 'user']];
+  let mini = '';
+  const it = cur();
+  if (it) mini = '<div class="mini"><button type="button" class="open" data-a="open" data-v="' + it.id + '">' + cover(it, 40) + '<span class="meta"><span class="t">' + esc(it.title) + '</span><span class="bar"><i id="mbar" style="width:' + progress().pct + '%"></i></span></span></button><button type="button" class="pp" data-a="toggle" aria-label="' + (S.playing ? 'Pause' : 'Play') + '">' + ic(S.playing ? 'pause' : 'play', 22) + '</button></div>';
+  return mini + '<nav class="nav" aria-label="Main menu">' + tabs.map(function (t) { return '<button type="button" data-a="tab" data-v="' + t[0] + '"' + (S.tab === t[0] ? ' aria-current="page"' : '') + '>' + ic(t[2], 26) + '<span>' + t[1] + '</span></button>'; }).join('') + '</nav>';
+}
+
+/* ---------- render ---------- */
+const view = document.getElementById('view');
+let lastKey = '';
+function calm() { return S.calm || (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches); }
+let io = null;
+function render() {
+  document.documentElement.className = 'ts-' + S.textSize;
+  document.getElementById('app').classList.toggle('calm', S.calm);
+  const key = S.screen + ':' + S.tab + ':' + S.createTab + ':' + S.libTab + (S.screen === 'welcome' ? ':' + S.ob + ':' + (S.obPin1 ? 1 : 0) : '');
+  const sc = document.getElementById('scroller');
+  const top = sc && key === lastKey ? sc.scrollTop : 0;
+  let h = '';
+  if (S.screen === 'welcome') h = vWelcome();
+  else if (S.screen === 'player') h = vPlayer();
+  else if (S.screen === 'settings') h = vSettings();
+  else if (S.screen === 'pin') h = vPin();
+  else if (S.screen === 'caregiver') h = vCaregiver();
+  else h = topbar() + { home: vHome, library: vLibrary, create: vCreate, me: vMe }[S.tab]() + vNav() + (S.tab === 'me' && S.editInt ? vSheet() : '') + (S.tab === 'create' && S.pubOpen ? vPub() : '') + (S.tab === 'home' && S.fbOpen ? vFb() : '');
+  const entering = key !== lastKey;
+  view.classList.toggle('enter', entering && !calm());
+  view.innerHTML = h;
+  const main = view.querySelector('.main');
+  if (main) Array.prototype.forEach.call(main.children, function (c, k) { c.style.setProperty('--d', Math.min(k, 8)); });
+  const sc2 = document.getElementById('scroller'); if (sc2) sc2.scrollTop = top;
+  lastKey = key;
+  S.pickAnim = false;
+  motion(sc2, entering);
+  recStatus();
+  if (S.playing) loop();
+  if (S.tour !== null) requestAnimationFrame(function () { requestAnimationFrame(drawTour); }); else { const t = document.getElementById('tour'); if (t) t.remove(); }
+}
+function motion(sc, entering) {
+  const waves = Array.prototype.slice.call(view.querySelectorAll('.wv'));
+  waves.forEach(function (el, k) { el.style.transitionDelay = (k % 10) * 32 + 'ms'; });
+  const rvs = view.querySelectorAll('.rv');
+  if (io) io.disconnect();
+  if (calm() || !sc || !('IntersectionObserver' in window) || !entering) { Array.prototype.forEach.call(rvs, function (el) { el.classList.add('in'); }); }
+  else {
+    io = new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }); }, { root: sc, threshold: 0.08 });
+    Array.prototype.forEach.call(rvs, function (el) { io.observe(el); });
+  }
+  if (!sc) return;
+  let last = sc.scrollTop, t = 0;
+  sc.addEventListener('scroll', function () {
+    const dy = sc.scrollTop - last; last = sc.scrollTop;
+    if (calm()) return;
+    const off = Math.max(-18, Math.min(18, -dy * 1.4));
+    waves.forEach(function (el) { el.style.transform = 'translateY(' + off + 'px)'; });
+    clearTimeout(t);
+    t = setTimeout(function () { waves.forEach(function (el) { el.style.transform = ''; }); }, 70);
+  }, { passive: true });
+}
+let toastTimer = 0;
+function toast(msg, sub) { const t = document.getElementById('toast'); t.innerHTML = '<i class="dot"></i><span class="tt"><b>' + esc(msg) + '</b>' + (sub ? '<span>' + esc(sub) + '</span>' : '') + '</span>'; t.style.bottom = (document.querySelector('.mini') ? 168 : document.querySelector('.nav') ? 108 : 32) + 'px'; t.classList.add('show'); clearTimeout(toastTimer); toastTimer = setTimeout(function () { t.classList.remove('show'); }, 2600); }
+
+/* ---------- actions ---------- */
+const A = {
+  start: function () { S.screen = 'tabs'; S.tab = 'home'; },
+  obnext: function () {
+    if (S.ob < 3) { S.ob++; return; }
+    if (S.ob === 3) {
+      const E = {};
+      if (!S.name.trim()) E.name = 'Please enter your name.';
+      if (!S.email.trim()) E.email = 'Please enter your email.';
+      else if (!EMAIL_RE.test(S.email.trim())) E.email = 'Please enter a valid email, e.g. name@example.com';
+      if (!S.age) E.age = 'Please choose your age group.';
+      S.obErr = E;
+      if (Object.keys(E).length) { render(); const f = document.querySelector('.field.bad'); if (f) { f.classList.add('shake'); f.focus(); } return false; }
+      S.ob = 4; S.obPin = ''; S.obPin1 = ''; S.obPinErr = '';
+    }
+  },
+  obskip: function () { S.ob = 3; },
+  obback: function () { if (S.ob === 4 && S.obPin1) { S.obPin1 = ''; S.obPin = ''; S.obPinErr = ''; return; } S.ob = Math.max(0, S.ob - 1); if (S.ob === 4) { S.obPin = ''; S.obPin1 = ''; } },
+  obage: function (v) { S.age = v; if (S.obErr) S.obErr.age = ''; },
+  obpin: function (v) {
+    if (S.obPin.length >= 4) return false;
+    S.obPin += v; S.obPinErr = '';
+    if (S.obPin.length < 4) return;
+    if (!S.obPin1) { S.obPin1 = S.obPin; S.obPin = ''; return; }
+    if (S.obPin === S.obPin1) { S.userPin = S.obPin; S.ob = 5; S.tmpInt = new Set(S.interests); toast('PIN saved', 'Only your caregiver needs it'); }
+    else { S.obPinErr = 'The PINs don\'t match. Please start again.'; S.obPin = ''; S.obPin1 = ''; }
+  },
+  obpindel: function () { S.obPin = S.obPin.slice(0, -1); },
+  tournext: function () { if (S.tour >= TOUR.length - 1) { S.tour = null; toast('You\'re all set, ' + who(), 'Enjoy the app'); } else S.tour++; },
+  tourskip: function () { S.tour = null; },
+  fblike: function () { S.pickFb = 'liked'; toast('Thanks!', 'We\'ll suggest more things like these'); },
+  fbno: function () { S.fbOpen = true; },
+  fbclose: function () { S.fbOpen = false; },
+  fbreason: function (v) {
+    candidates(false).forEach(function (p) { S.skipPicks.add(p.it.id); if (v === 'interest') S.lessGenres.add(p.it.genre); });
+    if (v === 'mood') S.moodCalm = true;
+    if (candidates(false).length < 3) S.skipPicks = new Set();
+    S.fbOpen = false; S.pickFb = null; S.pickOpen = true; S.pickAnim = true;
+    S.pickNote = v === 'mood' ? 'Updated: gentler picks for today' : 'Updated: different kinds of things for you';
+    toast('Got it', 'Here are new picks for you');
+  },
+  forgotpin: function () { toast('Prototype hint', 'The PIN is ' + S.userPin); return false; },
+  obdone: function () { S.interests = new Set(S.tmpInt); saveUser(); S.screen = 'tabs'; S.tab = 'home'; S.tour = 0; S.pickOpen = false; S.pickAnim = false; },
+  replay: function () { pauseIfPlaying(); S.screen = 'welcome'; S.ob = 0; S.obErr = {}; S.tour = null; },
+  gosearch: function () { S.screen = 'tabs'; S.tab = 'library'; render(); const q = document.getElementById('q'); if (q) q.focus(); return false; },
+  gocommunity: function () { S.tab = 'create'; S.createTab = 'community'; },
+  pubopen: function () { S.pubOpen = true; },
+  pubclose: function () { A.recpause(); S.pubOpen = false; },
+  tab: function (v) { S.screen = 'tabs'; S.tab = v; },
+  open: function (v) { open(v, false); return false; },
+  play: function (v) { open(v, true); return false; },
+  toggle: function () { if (S.playing) pause(); else play(); },
+  restart: function () { const it = cur(); const was = S.playing; pause(); S.pos = 0; S.wordIdx = 0; if (was) play(); },
+  closeplayer: function () { S.screen = 'tabs'; },
+  fav: function (v) { if (S.favs.has(v)) S.favs.delete(v); else { S.favs.add(v); toast('Saved', 'Find it in Favourites on Home'); } },
+  notforme: function (v) {
+    S.notForMe.add(v); S.favs.delete(v);
+    const it = ITEMS[v]; logPlay(it, false, 'Marked "Not for me"');
+    if (S.current === v) { pause(); S.current = null; S.screen = 'tabs'; }
+    toast('Got it', 'You will see fewer things like this');
+  },
+  libtab: function (v) { S.libTab = v; },
+  bookcat: function (v) { S.bookCat = v; },
+  musiccat: function (v) { S.musicCat = v; },
+  ctab: function (v) { S.createTab = v; },
+  cfeed: function (v) { S.cfeed = v; },
+  follow: function (v) { if (S.following.has(v)) S.following.delete(v); else { S.following.add(v); toast('You follow ' + v + ' now'); } },
+  like: function (v) { const p = S.posts.find(function (x) { return x.id === v; }); p.liked = !p.liked; p.likes += p.liked ? 1 : -1; },
+  replyopen: function (v) { S.replyOpen = S.replyOpen === v ? null : v; },
+  reply: function (v) { const parts = v.split('|'); const p = S.posts.find(function (x) { return x.id === parts[0]; }); p.replies.push({ who: 'You', text: parts[1] }); S.replyOpen = null; toast('Reply sent'); },
+  recstart: function () { if (!audio()) return; pauseIfPlaying(); S.pubOpen = false; S.rec = { state: 'rec', notes: [], t0: now(), heard: false }; clearInterval(recTimer); recTimer = setInterval(recStatus, 250); },
+  recstop: function () { S.rec.state = 'idle'; clearInterval(recTimer); if (!S.rec.notes.length) toast('Nothing recorded', 'Tap some keys while recording.'); else S.pubOpen = true; },
+  recplay: function () {
+    if (!S.rec.notes.length) { toast('Record a piece first.'); return; }
+    if (!audio()) return;
+    pauseIfPlaying();
+    if (!pianoBus) { pianoBus = ctx.createGain(); pianoBus.connect(master); }
+    pianoBus.gain.value = S.pvol / 100;
+    const t0 = now() + 0.05; S.rec.state = 'play'; S.rec.heard = true;
+    S.rec.bus = ctx.createGain(); S.rec.bus.connect(pianoBus);
+    S.rec.notes.forEach(function (n) { tone(n.m, t0 + n.t, n.d, 1, S.rec.bus); });
+    const len = S.rec.notes[S.rec.notes.length - 1].t + 1.2;
+    clearTimeout(recTimer); recTimer = setTimeout(function () { S.rec.state = 'idle'; render(); }, len * 1000);
+  },
+  recpause: function () { if (S.rec.bus) { try { S.rec.bus.disconnect(); } catch (e) { } } S.rec.state = 'idle'; clearTimeout(recTimer); },
+  recclear: function () { A.recpause(); S.rec.notes = []; S.rec.heard = false; S.pieceName = ''; S.pubOpen = false; },
+  metro: function () { S.metro = !S.metro; setMetro(); },
+  bpm: function (v) { S.bpm = +v; setMetro(); },
+  publish: function () {
+    const name = S.pieceName.trim() || 'My piece';
+    const notes = S.rec.notes.map(function (n) { return { m: n.m, t: n.t, d: n.d }; });
+    const id = 'u' + Date.now();
+    A.recpause();
+    const post = { id: id, author: 'You', title: name, genre: 'Calm piano', when: 'Just now', likes: 0, liked: false, fresh: true, replies: [], s: { notes: notes, len: notes[notes.length - 1].t + 1.2 } };
+    S.posts.unshift(post); registerPost(post);
+    setTimeout(function () { post.fresh = false; }, 2500);
+    S.rec.notes = []; S.rec.heard = false; S.pieceName = ''; S.pubOpen = false; S.createTab = 'community'; S.cfeed = 'foryou';
+    toast('Published', '"' + name + '" is live in Community');
+  },
+  nameedit: function () { S.editName = true; S.newName = who(); },
+  namecancel: function () { S.editName = false; },
+  namesave: function () { S.name = S.newName.trim() || S.name; S.editName = false; saveUser(); },
+  interest: function (v) { if (S.interests.has(v)) S.interests.delete(v); else S.interests.add(v); },
+  settings: function () { S.screen = 'settings'; },
+  caregiver: function () { S.screen = 'pin'; S.pin = ''; S.pinErr = false; },
+  toMe: function () { S.screen = 'tabs'; S.tab = 'me'; },
+  speed: function (v) { S.speed = v; const it = cur(); if (it && it.type === 'book' && S.playing) { pause(); play(); } },
+  calm: function () { S.calm = !S.calm; },
+  showwords: function () { S.showWords = !S.showWords; },
+  textsize: function (v) { S.textSize = v; },
+  pin: function (v) { S.pinErr = false; if (S.pin.length < 4) S.pin += v; if (S.pin.length === 4) { if (S.userPin && S.pin !== S.userPin) { S.pinErr = true; S.pin = ''; } else { S.screen = 'caregiver'; S.pin = ''; } } },
+  pindel: function () { S.pin = S.pin.slice(0, -1); },
+  picks: function () { S.pickOpen = !S.pickOpen; S.pickAnim = S.pickOpen; },
+  intedit: function () { S.tmpInt = new Set(S.interests); S.editInt = true; },
+  inttoggle: function (v) { if (S.tmpInt.has(v)) S.tmpInt.delete(v); else S.tmpInt.add(v); },
+  intsave: function () { S.interests = new Set(S.tmpInt); S.editInt = false; saveUser(); toast('Interests saved', 'Your picks on Home will change'); },
+  intcancel: function () { S.editInt = false; },
+  noop: function () { return false; },
+  sugg1: function (v) { S.sugg1 = v === 'yes' ? 'Done. The AI will keep suggesting these.' : 'OK. Nothing changed.'; },
+  sugg2: function (v) {
+    const skipped = Array.from(new Set(S.history.filter(function (h) { return !h.ok; }).map(function (h) { return h.genre; })));
+    if (v === 'yes') { skipped.forEach(function (g) { S.blockedGenres.add(g); }); S.sugg2 = 'Done. The AI will not suggest ' + listText(skipped, 'or') + ' music.'; }
+    else S.sugg2 = 'OK. Nothing changed.';
+  },
+  hideitem: function (v) { if (S.hidden.has(v)) S.hidden.delete(v); else S.hidden.add(v); },
+  lock: function () { S.locked = !S.locked; },
+  community: function () { S.community = !S.community; }
+};
+function pauseIfPlaying() { if (S.playing) pause(); }
+
+const appEl = document.getElementById('app');
+appEl.addEventListener('click', function (e) {
+  const el = e.target.closest('[data-a]');
+  if (!el || !appEl.contains(el)) return;
+  const fn = A[el.dataset.a]; if (!fn) return;
+  const r = fn(el.dataset.v, el);
+  if (r !== false) render();
+});
+appEl.addEventListener('input', function (e) {
+  const k = e.target.dataset.in; if (!k) return;
+  const v = e.target.value;
+  if (k === 'name') { S.name = v; if (S.obErr && S.obErr.name && v.trim()) { S.obErr.name = ''; e.target.classList.remove('bad'); const m = document.getElementById('nmErr'); if (m) m.remove(); } }
+  else if (k === 'email') { S.email = v; if (S.obErr && S.obErr.email && EMAIL_RE.test(v.trim())) { S.obErr.email = ''; e.target.classList.remove('bad'); const m = document.getElementById('emErr'); if (m) m.remove(); } }
+  else if (k === 'newname') S.newName = v;
+  else if (k === 'piece') S.pieceName = v;
+  else if (k === 'q') { S.q = v; document.getElementById('libBody').innerHTML = libResults(); }
+  else if (k === 'vol') { S.vol = +v; setMaster(); const l = document.getElementById('volv'); if (l) l.textContent = v + '%'; }
+  else if (k === 'pvol') { S.pvol = +v; if (pianoBus) pianoBus.gain.value = S.pvol / 100; }
+  else if (k === 'cap') { S.cap = +v; if (S.vol > S.cap) { S.vol = S.cap; setMaster(); } const l = document.getElementById('capv'); if (l) l.textContent = v + '%'; }
+});
+appEl.addEventListener('keydown', function (e) { if (e.key === 'Enter' && e.target.dataset && (e.target.dataset.in === 'name' || e.target.dataset.in === 'email')) { e.preventDefault(); if (A.obnext() !== false) render(); } });
+let swX = null;
+appEl.addEventListener('pointerdown', function (e) { swX = e.target.closest('#intro') ? e.clientX : null; });
+appEl.addEventListener('pointerup', function (e) {
+  if (swX === null || S.screen !== 'welcome' || S.ob > 2) return;
+  const dx = e.clientX - swX; swX = null;
+  if (Math.abs(dx) < 60) return;
+  if (dx < 0) S.ob = Math.min(3, S.ob + 1); else S.ob = Math.max(0, S.ob - 1);
+  render();
+});
+const fx = document.getElementById('fx');
+appEl.addEventListener('pointerdown', function (e) {
+  if (calm()) return;
+  const b = e.target.closest('button'); if (!b) return;
+  const r = appEl.getBoundingClientRect(), sc = r.width / appEl.offsetWidth || 1;
+  const x = (e.clientX - r.left) / sc, y = (e.clientY - r.top) / sc;
+  [0, 140].forEach(function (d, k) {
+    const sp = document.createElement('span'); sp.className = 'rp';
+    const size = b.dataset.key ? 90 : (k ? 240 : 160);
+    sp.style.cssText = 'left:' + x + 'px;top:' + y + 'px;width:' + size + 'px;height:' + size + 'px;animation-delay:' + d + 'ms';
+    fx.appendChild(sp); setTimeout(function () { sp.remove(); }, 1100);
+  });
+});
+appEl.addEventListener('pointerdown', function (e) {
+  const k = e.target.closest('[data-key]'); if (!k) return;
+  e.preventDefault();
+  pianoNote(k.dataset.key);
+  k.classList.add('down');
+  setTimeout(function () { k.classList.remove('down'); }, 180);
+  recStatus();
+});
+appEl.addEventListener('keydown', function (e) {
+  const k = e.target.closest && e.target.closest('[data-key]');
+  if (k && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); pianoNote(k.dataset.key); }
+});
+
+/* ---------- fit to screen ---------- */
+function fit() {
+  const phone = window.innerWidth <= 500;
+  document.body.classList.toggle('phone', phone);
+  const s = phone ? 1 : Math.min(1, (window.innerHeight - 32) / 844, (window.innerWidth - 32) / 390);
+  const shell = document.getElementById('shell');
+  shell.style.width = phone ? '' : (390 * s) + 'px';
+  shell.style.height = phone ? '' : (844 * s) + 'px';
+  appEl.style.transform = phone ? '' : 'scale(' + s + ')';
+}
+window.addEventListener('resize', fit);
+fit();
+render();
+window.__S = S;
+})();
+</script>
+</body>
+</html>
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#EDF2F6">
+<title>Audiobook App</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--g:#F2F5F9;--p:#FFFFFF;--i:#18283A;--o:#2F455C;--m:#536579;--l:#DDE5EE;--s:#C9D5E2;--b:#BFD3EA;--a:#E6EDF5;--t:#DCE8F1;--glass:rgba(255,255,255,.74);--line:rgba(24,40,58,.10);--ai:linear-gradient(120deg,#5B8DEF 0%,#8E7CF3 50%,#46B3C9 100%);--ease:cubic-bezier(.2,.8,.2,1)}
+*{box-sizing:border-box}
+html{font-size:16px}
+html.ts-S{font-size:14.5px}
+html.ts-L{font-size:18px}
+html,body{height:100%;margin:0}
+body{display:flex;align-items:center;justify-content:center;min-height:100vh;background:#DCE5EE;font-family:'Plus Jakarta Sans',system-ui,-apple-system,'Segoe UI',sans-serif;color:var(--i);-webkit-font-smoothing:antialiased}
+#shell{position:relative;flex-shrink:0;border-radius:40px;overflow:hidden;box-shadow:0 30px 80px rgba(24,40,58,.25)}
+#app{position:relative;width:390px;height:844px;transform-origin:top left;background:var(--g);display:flex;flex-direction:column;overflow:hidden;isolation:isolate}
+body.phone{display:block;background:var(--g)}
+body.phone #shell{width:100vw;height:100vh;height:100dvh;border-radius:0;box-shadow:none}
+body.phone #app{width:100%;height:100%}
+.bg{position:absolute;inset:0;z-index:-1;overflow:hidden;pointer-events:none}
+.bg i{position:absolute;border-radius:50%;filter:blur(64px);opacity:.6}
+.bg i:nth-child(1){width:320px;height:320px;left:-120px;top:-110px;background:#BFD6F4;animation:drift1 18s ease-in-out infinite alternate}
+.bg i:nth-child(2){width:280px;height:280px;right:-120px;top:220px;background:#DCD3F7;animation:drift2 22s ease-in-out infinite alternate}
+.bg i:nth-child(3){width:300px;height:300px;left:-70px;bottom:-150px;background:#C8EAF0;animation:drift1 26s ease-in-out infinite alternate-reverse}
+@keyframes drift1{to{transform:translate(60px,90px) scale(1.12)}}
+@keyframes drift2{to{transform:translate(-80px,60px) scale(.9)}}
+button,input{font-family:inherit;color:inherit}
+button{cursor:pointer;-webkit-tap-highlight-color:transparent}
+:focus-visible{outline:2.5px solid #5B8DEF;outline-offset:2px}
+.main{flex:1;min-height:0;overflow-y:auto;padding:24px 20px 20px;display:flex;flex-direction:column;gap:22px;scrollbar-width:none}
+.main::-webkit-scrollbar{display:none}
+.main>*{flex-shrink:0}
+h1{margin:0;font-size:1.8rem;line-height:1.15;font-weight:800;letter-spacing:-.025em}
+h2{margin:0;font-size:1.08rem;line-height:1.3;font-weight:800;letter-spacing:-.01em}
+p{margin:0}
+.sub{font-size:.95rem;line-height:1.45;font-weight:500;color:var(--m)}
+.small{font-size:.84rem;line-height:1.4;font-weight:600;color:var(--m)}
+.title{font-size:.98rem;line-height:1.3;font-weight:700}
+.eyebrow{font-size:.74rem;font-weight:800;letter-spacing:.09em;text-transform:uppercase;color:var(--m)}
+.grad{background:var(--ai);background-size:200% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:sheen 6s ease-in-out infinite alternate}
+@keyframes sheen{to{background-position:100% 0}}
+.aiicon{display:inline-flex}
+.aiicon svg{stroke:url(#aiG)}
+.stack{display:flex;flex-direction:column;gap:10px}
+.between{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.card{position:relative;background:var(--glass);-webkit-backdrop-filter:blur(20px) saturate(1.4);backdrop-filter:blur(20px) saturate(1.4);border:1px solid rgba(255,255,255,.75);box-shadow:inset 0 1px 0 rgba(255,255,255,.7),0 10px 30px rgba(24,40,58,.07);border-radius:24px;padding:16px;display:flex;flex-direction:column;gap:12px}
+.ai-card::before{content:'';position:absolute;inset:0;border-radius:24px;padding:1.5px;background:var(--ai);background-size:200% 100%;animation:sheen 6s ease-in-out infinite alternate;-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none}
+.btn{position:relative;display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px;padding:0 18px;border-radius:999px;border:1px solid var(--line);background:rgba(255,255,255,.88);font-size:.95rem;font-weight:700;transition:transform .25s var(--ease),background .2s,box-shadow .2s;box-shadow:0 2px 10px rgba(24,40,58,.06);text-decoration:none}
+.btn:active{transform:scale(.95)}
+.btn.primary,.btn.dark{background:var(--i);color:#fff;border-color:var(--i);box-shadow:0 10px 24px rgba(24,40,58,.22)}
+.btn.block{width:100%}
+.btn.sm{min-height:44px;padding:0 14px;font-size:.88rem}
+.btn.icon{width:44px;min-height:44px;padding:0}
+.btn[aria-pressed="true"]{background:var(--i);color:#fff;border-color:var(--i)}
+.chips{display:flex;gap:8px;flex-wrap:wrap}
+.chip{min-height:44px;padding:0 16px;border-radius:999px;border:1px solid var(--line);background:rgba(255,255,255,.85);font-size:.9rem;font-weight:700;display:inline-flex;align-items:center;gap:7px;transition:background .25s,color .25s,transform .25s var(--ease)}
+.chip:active{transform:scale(.95)}
+.chip[aria-pressed="true"]{background:var(--i);color:#fff;border-color:var(--i)}
+.chip.static{min-height:40px;cursor:default;background:var(--glass);border-color:rgba(255,255,255,.8);box-shadow:0 4px 14px rgba(24,40,58,.06)}
+.seg{display:grid;grid-auto-flow:column;grid-auto-columns:1fr;gap:4px;padding:4px;border-radius:999px;background:rgba(24,40,58,.06)}
+.seg button{min-height:44px;border:0;border-radius:999px;background:transparent;font-size:.92rem;font-weight:700;color:var(--m);transition:background .25s,color .25s}
+.seg button[aria-pressed="true"]{background:#fff;color:var(--i);box-shadow:0 4px 12px rgba(24,40,58,.1)}
+.list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px}
+.row{display:flex;align-items:center;gap:12px;width:100%;padding:10px 10px 10px 10px;border-radius:20px;border:1px solid rgba(255,255,255,.75);background:var(--glass);-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);box-shadow:0 6px 20px rgba(24,40,58,.06);text-align:left}
+.rowbtn{display:flex;align-items:center;gap:12px;flex:1;min-width:0;padding:0;border:0;background:transparent;text-align:left}
+.meta{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}
+.tag{display:inline-flex;align-items:center;gap:6px;align-self:flex-start;padding:3px 10px;border-radius:999px;background:rgba(24,40,58,.07);font-size:.72rem;font-weight:700;color:var(--i)}
+.tag.ai{background:var(--ai);color:#fff}
+.field{height:54px;width:100%;padding:0 18px;border-radius:18px;border:1px solid var(--line);background:rgba(255,255,255,.92);font-size:1rem;font-weight:600;box-shadow:inset 0 1px 2px rgba(24,40,58,.05)}
+.field::placeholder{color:var(--m);opacity:1}
+.nav{position:relative;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:4px;margin:0 14px 14px;padding:6px;border-radius:30px;background:rgba(255,255,255,.82);-webkit-backdrop-filter:blur(20px);backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,.85);box-shadow:0 12px 32px rgba(24,40,58,.14)}
+.nav button{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;min-height:56px;border:0;border-radius:24px;background:transparent;font-size:.74rem;font-weight:700;color:var(--m);transition:background .3s var(--ease),color .3s}
+.nav button[aria-current="page"]{background:var(--i);color:#fff}
+.cover{flex-shrink:0;border-radius:14px;display:flex;flex-direction:column;justify-content:space-between;padding:8px;overflow:hidden;text-align:left;box-shadow:inset 0 0 0 1px rgba(255,255,255,.45),0 6px 16px rgba(24,40,58,.14)}
+.cover .ct{font-weight:800;letter-spacing:-.02em;line-height:1.12;color:var(--i)}
+.cover .ca{font-size:10px;line-height:12px;font-weight:800;color:var(--m)}
+.cover.art{align-items:center;justify-content:center;color:var(--i)}
+.stackc{display:flex;padding-left:12px}
+.stackc .cover{width:34px !important;height:34px !important;margin-left:-12px;border-radius:50%;padding:0;border:2px solid #fff}
+.stackc .cover>*{display:none}
+.pickhead{display:flex;align-items:center;gap:12px;width:100%;padding:0;border:0;background:transparent;text-align:left}
+.chevr{display:inline-flex;color:var(--m);transition:transform .4s var(--ease)}
+.mini{display:flex;align-items:center;gap:10px;margin:0 14px 8px;padding:8px 8px 8px 10px;border-radius:24px;background:rgba(24,40,58,.92);-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);color:#fff;box-shadow:0 12px 30px rgba(24,40,58,.25)}
+.mini .open{display:flex;align-items:center;gap:10px;flex:1;min-width:0;border:0;background:transparent;color:#fff;text-align:left;padding:0}
+.mini .t{font-size:.9rem;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.mini .pp{width:44px;height:44px;border-radius:50%;border:0;background:#fff;color:var(--i);display:flex;align-items:center;justify-content:center}
+.mini .cover{box-shadow:none}
+.bar{height:6px;border-radius:999px;background:rgba(24,40,58,.08);overflow:hidden}
+.bar>i{display:block;height:100%;width:0;background:var(--ai);border-radius:999px}
+.mini .bar{height:3px;background:rgba(255,255,255,.2)}
+.toast{position:absolute;left:16px;right:16px;bottom:108px;padding:13px 16px;border-radius:18px;background:rgba(24,40,58,.94);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);color:#fff;font-weight:700;font-size:.92rem;opacity:0;transform:translateY(10px);pointer-events:none;transition:opacity .3s,transform .4s var(--ease);z-index:30}
+.toast.show{opacity:1;transform:none}
+.sw{display:flex;align-items:center;justify-content:space-between;gap:12px;width:100%;min-height:60px;padding:8px 12px 8px 16px;border-radius:20px;border:1px solid rgba(255,255,255,.75);background:var(--glass);-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);box-shadow:0 6px 20px rgba(24,40,58,.05);text-align:left;font-size:.98rem;font-weight:700}
+.sw .trk{display:block;flex-shrink:0;width:52px;height:32px;padding:3px;border-radius:999px;background:rgba(24,40,58,.16);transition:background .3s}
+.sw .trk i{display:block;width:26px;height:26px;border-radius:50%;background:#fff;box-shadow:0 2px 6px rgba(24,40,58,.25);transition:margin .35s var(--ease)}
+.sw[aria-checked="true"] .trk{background:var(--i)}
+.sw[aria-checked="true"] .trk i{margin-left:20px}
+.piano{position:relative;height:196px;display:flex;gap:3px;user-select:none;-webkit-user-select:none;touch-action:none}
+.wk{flex:1;border:1px solid rgba(24,40,58,.14);border-radius:0 0 12px 12px;background:linear-gradient(#FFFFFF,#EEF2F7);box-shadow:inset 0 -6px 0 rgba(24,40,58,.06),0 4px 10px rgba(24,40,58,.08);display:flex;align-items:flex-end;justify-content:center;padding:0 0 10px;font-size:.72rem;font-weight:700;color:var(--m);transition:transform .08s,background .15s}
+.wk.down{background:linear-gradient(#DCE7F8,#C5D6F0);transform:translateY(2px);box-shadow:inset 0 -2px 0 rgba(24,40,58,.06)}
+.bk{position:absolute;top:0;width:24px;height:116px;margin-left:-12px;padding:0;background:linear-gradient(#34495F,#101C29);border:0;border-radius:0 0 8px 8px;box-shadow:0 6px 12px rgba(16,28,41,.35),inset 0 -5px 0 rgba(255,255,255,.08);z-index:2;transition:transform .08s}
+.bk.down{background:linear-gradient(#5B8DEF,#8E7CF3);transform:translateY(2px)}
+.words{display:flex;flex-wrap:wrap;gap:4px 2px;padding:14px;border-radius:20px;background:var(--glass);border:1px solid rgba(255,255,255,.75);font-size:1.05rem;line-height:1.75rem;font-weight:600}
+.words span{padding:0 3px;border-radius:7px;transition:background .25s}
+.words span.on{background:linear-gradient(120deg,rgba(91,141,239,.28),rgba(142,124,243,.28))}
+input[type=range]{width:100%;height:44px;accent-color:var(--i)}
+.av{display:flex;align-items:center;justify-content:center;flex-shrink:0;border-radius:50%;background:var(--ai);font-weight:800;color:#fff;box-shadow:0 10px 26px rgba(91,141,239,.35)}
+.hdr{display:flex;flex-direction:column;gap:14px;padding:20px 20px 18px;background:linear-gradient(135deg,#18283A,#2C4363);color:#fff}
+.hdr .btn{background:rgba(255,255,255,.12);color:#fff;border-color:rgba(255,255,255,.3);box-shadow:none;align-self:flex-start}
+.hdr .sub{color:#C9D5E2}
+.gbar{display:grid;grid-template-columns:110px 1fr 40px;align-items:center;gap:10px;font-size:.88rem;font-weight:700}
+.keypad{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.keypad button{min-height:62px;border-radius:22px;border:1px solid rgba(255,255,255,.8);background:var(--glass);box-shadow:0 6px 18px rgba(24,40,58,.07);font-size:1.45rem;font-weight:700}
+.dots{display:flex;justify-content:center;gap:16px}
+.dots i{display:block;width:16px;height:16px;border-radius:50%;background:rgba(24,40,58,.14);transition:background .25s,transform .3s var(--ease)}
+.dots i.f{background:var(--i);transform:scale(1.15)}
+.hscroll{display:flex;gap:14px;overflow-x:auto;padding:4px 2px 8px;scrollbar-width:none}
+.hscroll::-webkit-scrollbar{display:none}
+.hscroll button{flex-shrink:0;width:112px;padding:0;border:0;background:transparent;text-align:left;display:flex;flex-direction:column;gap:8px}
+.hero{display:flex;flex-direction:column;align-items:center;gap:14px;text-align:center}
+.orb{position:relative;width:150px;height:150px;border-radius:50%;background:conic-gradient(from 0deg,#5B8DEF,#8E7CF3,#46B3C9,#5B8DEF);display:flex;align-items:center;justify-content:center;animation:spin 16s linear infinite;box-shadow:0 24px 60px rgba(91,141,239,.35);margin-bottom:8px}
+.orb::after{content:'';position:absolute;inset:7px;border-radius:50%;background:rgba(255,255,255,.78)}
+.orb span{position:relative;z-index:1;display:flex;animation:spin 16s linear infinite reverse;color:var(--i)}
+@keyframes spin{to{transform:rotate(360deg)}}
+.glow{position:absolute;left:50%;top:30px;width:360px;height:360px;margin-left:-180px;border-radius:50%;filter:blur(70px);opacity:.75;z-index:-1;pointer-events:none}
+.eq{display:inline-flex;gap:3px;align-items:flex-end;height:14px}
+.eq i{display:block;width:3px;height:4px;border-radius:2px;background:currentColor;animation:eq 1s ease-in-out infinite}
+.eq i:nth-child(2){animation-delay:.2s}
+.eq i:nth-child(3){animation-delay:.4s}
+@keyframes eq{0%,100%{height:4px}50%{height:14px}}
+.enter .main>*{animation:rise .65s var(--ease) backwards;animation-delay:calc(var(--d,0) * 60ms)}
+@keyframes rise{from{opacity:0;transform:translateY(20px);filter:blur(6px)}}
+.unfold{animation:unfold .8s var(--ease) backwards;animation-delay:calc(var(--d,0) * 110ms + 80ms)}
+@keyframes unfold{0%{opacity:0;transform:scale(.86) translateY(-14px);filter:blur(10px)}55%{opacity:1}}
+.wv{transition:transform .55s var(--ease)}
+.rv{opacity:0;translate:0 26px;transition:opacity .7s var(--ease),translate .7s var(--ease)}
+.rv.in{opacity:1;translate:0 0}
+#fx{position:absolute;inset:0;pointer-events:none;z-index:40;overflow:hidden}
+.rp{position:absolute;border-radius:50%;border:1.5px solid rgba(91,141,239,.5);background:radial-gradient(circle,rgba(142,124,243,.16),rgba(91,141,239,0) 70%);transform:translate(-50%,-50%) scale(0);animation:rp .8s var(--ease) forwards}
+@keyframes rp{to{transform:translate(-50%,-50%) scale(1);opacity:0}}
+.sheet-back{position:absolute;inset:0;z-index:20;background:rgba(24,40,58,.32);-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px);animation:fade .3s both;display:flex;flex-direction:column;justify-content:flex-end}
+.sheet{background:rgba(248,250,252,.97);border-radius:30px 30px 0 0;padding:10px 20px 26px;max-height:86%;overflow-y:auto;display:flex;flex-direction:column;gap:16px;animation:up .5s var(--ease) both;box-shadow:0 -20px 50px rgba(24,40,58,.2)}
+.sheet .grab{width:40px;height:5px;border-radius:3px;background:rgba(24,40,58,.2);align-self:center;margin-bottom:4px}
+.sheet .chip[aria-pressed="true"]{animation:pop .35s var(--ease)}
+@keyframes up{from{transform:translateY(100%)}}
+@keyframes fade{from{opacity:0}}
+@keyframes pop{50%{transform:scale(1.08)}}
+.calm *,.calm *::before,.calm *::after{animation:none !important;transition:none !important}
+.calm .rv{opacity:1;translate:0 0}
+@media (prefers-reduced-motion: reduce){*,*::before,*::after{animation:none !important;transition:none !important}.rv{opacity:1;translate:0 0}}
+.hand{font-family:'Caveat','Segoe Print','Bradley Hand','Comic Sans MS',cursive;font-weight:600;letter-spacing:0}
+.hi{font-size:1.5rem;line-height:1;color:var(--o)}
+h1.big{font-size:2.3rem;line-height:1.03;letter-spacing:-.045em;font-weight:800}
+.big2{font-size:1.7rem;line-height:1.05;letter-spacing:-.035em;font-weight:800;margin:0}
+.sect{font-size:1.7rem;line-height:1;font-weight:700;margin:0}
+.topbar{display:flex;align-items:center;justify-content:space-between;padding:10px 16px 0 20px;flex-shrink:0}
+.topbar .date{font-size:1.25rem;color:var(--m)}
+.btn.ghost{background:transparent;border-color:transparent;box-shadow:none}
+.avs{width:40px;height:40px;border-radius:50%;border:0;background:var(--i);color:#fff;font-weight:800;font-size:.85rem;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;padding:0}
+.avs.lg{width:42px;height:42px;background:var(--ai);font-size:1rem}
+.link{white-space:nowrap;border:0;background:none;padding:10px 4px;font-weight:700;font-size:.9rem;color:var(--o);text-decoration:underline;text-underline-offset:3px;min-height:44px}
+.pola{position:relative;display:inline-flex;flex-direction:column;flex-shrink:0;background:#fff;padding:7px 7px 0;border-radius:3px;box-shadow:0 1px 2px rgba(24,40,58,.08),0 14px 30px rgba(24,40,58,.17);transform:rotate(var(--r,-2deg));transition:transform .5s var(--ease)}
+.pola::before{content:'';position:absolute;top:-5px;left:50%;width:13px;height:13px;margin-left:-6.5px;border-radius:50%;background:radial-gradient(circle at 35% 32%,#6B7C8F,#18283A 68%);box-shadow:0 3px 5px rgba(0,0,0,.32);z-index:2}
+.pola .cover{border-radius:2px;box-shadow:inset 0 0 0 1px rgba(24,40,58,.06)}
+.pola .cap{font-family:'Caveat','Segoe Print','Bradley Hand',cursive;font-weight:600;font-size:1.15rem;line-height:1.02;padding:6px 3px 9px;color:var(--i);max-width:var(--w);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-align:left}
+.pola .cap small{display:block;font-size:.88rem;color:var(--m);overflow:hidden;text-overflow:ellipsis}
+button:active .pola{transform:rotate(0deg) scale(.97)}
+.hscroll.pol{gap:18px;padding:18px 22px 34px;margin:-6px -20px -22px}
+.hscroll.pol button{width:auto}
+.hscroll .pcard{width:150px;min-height:132px;padding:14px;border-radius:20px;border:1px solid rgba(255,255,255,.8);background:var(--glass);-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);box-shadow:0 6px 20px rgba(24,40,58,.07);gap:4px}
+.who{font-size:1.3rem;line-height:1;color:var(--i)}
+.dt{display:inline-block;width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.tag.you{background:#5B6BEF;color:#fff;font-family:'Plus Jakarta Sans',sans-serif;font-size:.62rem;padding:2px 7px;vertical-align:middle;letter-spacing:.04em}
+.now{padding:20px 16px 16px}
+.nowbtn{display:flex;align-items:center;gap:18px;width:100%;padding:0;border:0;background:transparent;text-align:left}
+.stats{display:flex;gap:24px}
+.stats>span{display:flex;flex-direction:column;font-size:.74rem;font-weight:600;color:var(--m)}
+.stats b{font-size:1.9rem;font-weight:800;letter-spacing:-.04em;line-height:1.05;color:var(--i)}
+.stats.light>span{color:#C9D5E2}.stats.light b{color:#fff}
+.empty{font-size:1.45rem;color:var(--m);text-align:center;padding:10px 0 0;margin:0}
+.field.pill{border-radius:999px}
+.steps{list-style:none;margin:0;padding:0;display:flex;gap:6px}
+.steps li{flex:1;display:flex;align-items:center;justify-content:center;gap:6px;min-height:38px;font-size:.82rem;font-weight:700;color:var(--m);border-radius:999px;background:rgba(24,40,58,.05);transition:background .35s,color .35s}
+.steps li i{font-style:normal;width:20px;height:20px;border-radius:50%;display:grid;place-items:center;background:rgba(24,40,58,.1);font-size:.72rem}
+.steps li.on{background:var(--i);color:#fff}.steps li.on i{background:rgba(255,255,255,.22)}
+.steps li.done{color:var(--i)}.steps li.done i{background:#2E9E6A;color:#fff}
+.recdot{width:9px;height:9px;border-radius:50%;background:#E5484D;animation:blink 1s ease-in-out infinite}
+@keyframes blink{50%{opacity:.25}}
+.rate{display:flex;align-items:center;gap:10px;margin-top:4px}
+.rate b{font-size:2.3rem;font-weight:800;letter-spacing:-.04em;line-height:1;background:var(--ai);-webkit-background-clip:text;background-clip:text;color:transparent}
+.rate>span{display:flex;flex-direction:column}
+.stars{color:#5B6BEF;letter-spacing:2px;font-size:.9rem}
+.summary{gap:8px}
+.summary .cols{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.summary ul{margin:6px 0 0;padding-left:16px;font-size:.88rem;font-weight:600;line-height:1.45;color:var(--o)}
+.replies{gap:6px !important;padding-top:4px;border-top:1px solid var(--line)}
+.replies li{font-size:.9rem;font-weight:600;color:var(--o);padding-top:6px}
+.replies .hand{font-size:1.15rem;color:var(--i);margin-right:4px}
+.fresh{animation:fresh 2.4s var(--ease)}
+@keyframes fresh{0%{box-shadow:0 0 0 3px rgba(91,141,239,.55),0 10px 30px rgba(24,40,58,.07)}100%{box-shadow:inset 0 1px 0 rgba(255,255,255,.7),0 10px 30px rgba(24,40,58,.07)}}
+.ob{padding:20px 24px 28px;gap:24px}
+.obbar{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.obbar i{display:block;height:4px;border-radius:2px;background:rgba(24,40,58,.12);transition:background .5s}
+.obbar i.on{background:var(--i)}
+.collage{position:relative;height:200px;margin:4px -6px 0}
+.collage .pola{position:absolute}
+.collage .pola:nth-child(1){left:6px;top:28px}
+.collage .pola:nth-child(2){left:50%;margin-left:-62px;top:4px;z-index:2}
+.collage .pola:nth-child(3){right:6px;top:46px}
+.enter .collage .pola{animation:drop .9s var(--ease) backwards}
+.enter .collage .pola:nth-child(2){animation-delay:.12s}.enter .collage .pola:nth-child(3){animation-delay:.24s}
+@keyframes drop{from{opacity:0;transform:translateY(-30px) rotate(0deg)}}
+.obfoot{margin-top:auto;display:flex;flex-direction:column;gap:12px}
+.btn.big{min-height:58px;font-size:1.05rem}
+.chip.pick[aria-pressed="true"]{animation:pop .35s var(--ease)}
+.toast{left:50%;right:auto;width:max-content;max-width:340px;transform:translate(-50%,12px);background:#0F1720;border-radius:14px;padding:12px 18px 12px 14px;display:flex;gap:10px;align-items:flex-start;box-shadow:0 14px 34px rgba(0,0,0,.28)}
+.toast.show{transform:translate(-50%,0)}
+.toast .dot{width:8px;height:8px;border-radius:50%;background:#3DDC84;margin-top:6px;flex-shrink:0}
+.toast .tt{display:flex;flex-direction:column;gap:1px}
+.toast .tt span{font-weight:500;color:#AEBBC9;font-size:.84rem}
+
 /* one font everywhere */
 .hand,.pola .cap,.tag.you{font-family:inherit;letter-spacing:-.01em}
 .hi{font-size:1rem;font-weight:600;line-height:1.3;color:var(--m)}
