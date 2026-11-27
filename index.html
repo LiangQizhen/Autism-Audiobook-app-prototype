@@ -261,6 +261,28 @@ button:active .pola{transform:rotate(0deg) scale(.97)}
 #tour .tdots i{display:block;width:7px;height:7px;border-radius:50%;background:rgba(24,40,58,.18)}
 #tour .tdots i.on{background:var(--i)}
 
+
+/* spotify-style home */
+.quick{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.qt{display:flex;align-items:center;gap:10px;height:56px;padding:0 10px 0 0;border-radius:12px;overflow:hidden;border:1px solid rgba(255,255,255,.8);background:var(--glass);-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);box-shadow:0 4px 14px rgba(24,40,58,.06);text-align:left}
+.qt .cover{border-radius:0;box-shadow:none;padding:5px}
+.qt .cover .ct{font-size:7px !important}
+.qt b{flex:1;min-width:0;font-size:.82rem;font-weight:800;line-height:1.2;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.sec h2{font-size:1.35rem;font-weight:800;letter-spacing:-.025em}
+.sec .lead{margin-top:-6px}
+.row-sq{display:flex;gap:14px;overflow-x:auto;padding:2px 20px 6px;margin:0 -20px;scrollbar-width:none}
+.row-sq::-webkit-scrollbar{display:none}
+.sq{flex-shrink:0;width:148px;padding:0;border:0;background:transparent;text-align:left;display:flex;flex-direction:column;gap:7px}
+.sq .cover{border-radius:14px;box-shadow:0 10px 24px rgba(24,40,58,.14)}
+.sq .t{font-size:.9rem;font-weight:800;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sq .d{font-size:.78rem;font-weight:600;color:var(--m);line-height:1.3;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;margin-top:-4px}
+.sq .why{display:inline-flex;align-items:center;gap:4px;font-size:.74rem;font-weight:700;color:#5B6BEF;line-height:1.25;margin-top:-3px}
+.sq.big{width:164px}
+.mixlabel{position:absolute;left:10px;bottom:10px;right:10px;font-size:1rem;font-weight:800;color:var(--i);letter-spacing:-.02em;line-height:1.1}
+.mixwrap{position:relative;display:block}
+.mixwrap .badge{position:absolute;left:10px;top:10px;width:24px;height:24px;border-radius:50%;background:#fff;display:grid;place-items:center;box-shadow:0 2px 6px rgba(24,40,58,.15)}
+.mixwrap .bar2{position:absolute;left:0;right:0;bottom:0;height:5px;background:var(--ai)}
+
 /* one font everywhere */
 .hand,.pola .cap,.tag.you{font-family:inherit;letter-spacing:-.01em}
 .hi{font-size:1rem;font-weight:600;line-height:1.3;color:var(--m)}
@@ -751,7 +773,7 @@ function vFb() {
 
 /* first-time tour */
 const TOUR = [
-  { sel: '.ai-card', t: 'Recommended for you', p: 'Music picked from what you listen to. Tap it to see them, and tell us if you like them.' },
+  { sel: '#recSec', t: 'Recommended for you', p: 'Music picked from what you listen to. Tap Yes or No below to tell us if you like it.' },
   { sel: '.nav [data-v="library"]', t: 'Library', p: 'All books and music, sorted by type. You can also search here.' },
   { sel: '.nav [data-v="create"]', t: 'Create', p: 'Play the piano, record a piece and share it with the community.' },
   { sel: '.nav [data-v="me"]', t: 'Me', p: 'Your interests, settings, and the caregiver area.' }
@@ -761,7 +783,7 @@ function drawTour() {
   if (S.tour === null || S.screen !== 'tabs' || S.tab !== 'home') return;
   const st = TOUR[S.tour], app = document.getElementById('app'), el = app.querySelector(st.sel);
   if (!el) return;
-  if (st.sel === '.ai-card') el.scrollIntoView({ block: 'center' });
+  if (st.sel === '#recSec') el.scrollIntoView({ block: 'center' });
   const sc = app.getBoundingClientRect().width / app.offsetWidth || 1;
   const ar = app.getBoundingClientRect(), r = el.getBoundingClientRect();
   const x = (r.left - ar.left) / sc - 6, y = (r.top - ar.top) / sc - 6, w = r.width / sc + 12, h = r.height / sc + 12;
@@ -775,38 +797,40 @@ function drawTour() {
   app.appendChild(t);
 }
 
+function sq(it, desc, extra) {
+  return '<button type="button" class="sq wv rv" data-a="play" data-v="' + it.id + '" aria-label="Play ' + esc(it.title) + '">' + cover(it, 148) +
+    '<span class="t">' + esc(it.title) + '</span><span class="d">' + esc(desc) + '</span>' + (extra || '') + '</button>';
+}
 function vHome() {
   const it = cur(), picks = candidates(false);
-  let h = '<main class="main" id="scroller"><header class="stack" style="gap:6px"><span class="hand hi">' + greet() + ', ' + esc(who()) + '</span><h1 class="big">' + (it ? 'Pick up where you left off.' : 'What would you like to hear today?') + '</h1></header>';
-  if (it) {
-    const pr = progress();
-    h += '<section class="card now"><button type="button" class="nowbtn" data-a="open" data-v="' + it.id + '">' + pola(it, 92, -4, it.type === 'book' ? 'reading now' : 'on now') +
-      '<span class="meta" style="gap:6px"><span class="eyebrow" style="display:flex;align-items:center;gap:8px">' + (S.playing ? eq() + 'Now playing' : 'Continue') + '</span><span class="title" style="font-size:1.12rem">' + esc(it.title) + '</span><span class="small">' + esc(it.by) + '</span>' +
-      '<span class="bar" style="margin-top:6px"><i style="width:' + pr.pct + '%"></i></span><span class="small">' + pr.left + '</span></span></button></section>';
-  }
-  const favs = Array.from(S.favs).map(function (id) { return ITEMS[id]; }).filter(Boolean);
-  h += '<section class="stack">' + sect('Favourites', '<span class="small">' + favs.length + ' saved</span>');
-  h += favs.length ? '<div class="hscroll pol">' + favs.map(function (f, k) { return '<button type="button" class="wv rv" data-a="play" data-v="' + f.id + '" aria-label="Play ' + esc(f.title) + '">' + pola(f, 108, [-3, 2.5, -1.5, 3][k % 4], f.title, f.by) + '</button>'; }).join('') + '</div>' : '<p class="empty hand">Nothing saved yet.</p><p class="small" style="text-align:center">Tap the heart in the player to keep something here.</p>';
-  h += '</section>';
-  h += '<section class="card ai-card"><button type="button" class="pickhead" data-a="picks" aria-expanded="' + S.pickOpen + '"><span class="aiicon">' + ic('spark', 28) + '</span>' +
-    '<span class="meta"><span class="title grad" style="font-size:1.15rem">Recommended for you</span><span class="small">' + (picks.length ? 'Gets better the more you listen' : 'Listen to a few things first') + '</span></span>' +
-    (S.pickOpen ? '' : '<span class="stackc" aria-hidden="true">' + picks.slice(0, 3).map(function (p) { return cover(p.it, 34); }).join('') + '</span>') +
-    '<span class="chevr" style="transform:rotate(' + (S.pickOpen ? 90 : 0) + 'deg)">' + ic('chev', 20) + '</span></button>';
-  if (S.pickOpen && picks.length) {
-    h += '<ul class="list">' + picks.map(function (p, k) {
-      return '<li class="row wv' + (S.pickAnim ? ' unfold' : '') + '" style="--d:' + k + '"><button type="button" class="rowbtn" data-a="play" data-v="' + p.it.id + '">' + cover(p.it, 52) + '<span class="meta"><span class="title">' + esc(p.it.title) + '</span><span class="small">' + esc(p.reason) + '</span></span></button>' +
-        '<button type="button" class="btn icon" data-a="notforme" data-v="' + p.it.id + '" aria-label="Not for me: ' + esc(p.it.title) + '">' + ic('hide', 20) + '</button></li>';
-    }).join('') + '</ul>' + (S.pickNote ? '<p class="small" style="display:flex;align-items:center;gap:6px">' + ic('spark', 15) + esc(S.pickNote) + '</p>' : '') +
+  let h = '<main class="main" id="scroller"><header class="stack" style="gap:4px"><span class="hand hi">' + greet() + ', ' + esc(who()) + '</span><h1 class="big" style="font-size:2rem">' + (it ? 'Pick up where you left off.' : 'What would you like to hear today?') + '</h1></header>';
+  // quick-access grid (Spotify "Good afternoon" tiles)
+  const quick = [];
+  [it ? it.id : null].concat(S.recent, Array.from(S.favs), picks.map(function (p) { return p.it.id; }), ['ocean', 'pride']).forEach(function (id) { if (id && ITEMS[id] && quick.indexOf(id) < 0 && quick.length < 6) quick.push(id); });
+  h += '<div class="quick">' + quick.map(function (id) { const q = ITEMS[id]; return '<button type="button" class="qt wv" data-a="play" data-v="' + id + '">' + cover(q, 56) + '<b>' + esc(q.title) + '</b>' + (S.current === id && S.playing ? eq() : '') + '</button>'; }).join('') + '</div>';
+  // Jump back in
+  const jb = S.recent.map(function (id) { return ITEMS[id]; }).filter(Boolean);
+  h += '<section class="stack sec"><h2>Jump back in</h2><div class="row-sq">' + jb.map(function (x) { return sq(x, x.by); }).join('') + '</div></section>';
+  // Recommended for you
+  h += '<section class="stack sec" id="recSec"><div style="display:flex;align-items:center;gap:8px"><span class="aiicon">' + ic('spark', 22) + '</span><h2 class="grad">Recommended for you</h2></div><p class="small lead">Gets better the more you listen</p>';
+  if (picks.length) {
+    h += '<div class="row-sq">' + picks.map(function (p, k) {
+      return '<span class="sq big' + (S.pickAnim ? ' unfold' : '') + '" style="--d:' + k + ';width:164px"><button type="button" data-a="play" data-v="' + p.it.id + '" style="padding:0;border:0;background:transparent;text-align:left;display:flex;flex-direction:column;gap:7px" aria-label="Play ' + esc(p.it.title) + '">' +
+        '<span class="mixwrap">' + cover(p.it, 164) + '<span class="bar2"></span></span>' +
+        '<span class="t">' + esc(p.it.title) + '</span><span class="why">' + ic('spark', 13) + esc(p.reason) + '</span></button></span>';
+    }).join('') + '</div>' + (S.pickNote ? '<p class="small" style="display:flex;align-items:center;gap:6px">' + ic('spark', 15) + esc(S.pickNote) + '</p>' : '') +
       (S.pickFb === 'liked' ? '<div class="fb done">' + ic('check', 18, ' stroke-width="2.6"') + 'Thanks! We\'ll suggest more like these.</div>'
         : '<div class="fb"><span class="q">Do you like today\'s picks?</span><span class="btns"><button type="button" class="btn sm" data-a="fblike" aria-label="Yes, I like them">' + ic('heart', 17) + '<span>Yes</span></button><button type="button" class="btn sm" data-a="fbno" aria-label="No, not really">' + ic('x', 17) + '<span>No</span></button></span></div>');
-  }
+  } else h += '<p class="empty hand">Listen to a few things first.</p>';
   h += '</section>';
+  // Your favourites
+  const favs = Array.from(S.favs).map(function (id) { return ITEMS[id]; }).filter(Boolean);
+  h += '<section class="stack sec"><div class="between"><h2>Your favourites</h2><span class="small">' + favs.length + ' saved</span></div>' +
+    (favs.length ? '<div class="row-sq">' + favs.map(function (x) { return sq(x, x.by); }).join('') + '</div>' : '<p class="small">Tap the heart in the player to keep something here.</p>') + '</section>';
+  // From the community
   if (S.community) {
-    const posts = S.posts.slice(0, 4);
-    h += '<section class="stack">' + sect('From the community', '<button type="button" class="link" data-a="gocommunity">See all</button>') +
-      '<div class="hscroll">' + posts.map(function (p) {
-        return '<button type="button" class="pcard wv rv" data-a="play" data-v="' + p.id + '"><span class="hand who">' + esc(p.author) + '</span><span class="title">' + esc(p.title) + '</span><span class="small" style="display:flex;align-items:center;gap:6px"><i class="dt" style="background:' + DOT.Community + '"></i>' + esc(p.genre) + '</span><span class="small" style="display:flex;align-items:center;gap:5px;margin-top:auto">' + ic('heart', 15) + p.likes + '</span></button>';
-      }).join('') + '</div></section>';
+    h += '<section class="stack sec"><div class="between"><h2>From the community</h2><button type="button" class="link" data-a="gocommunity">See all</button></div><div class="row-sq">' +
+      S.posts.slice(0, 5).map(function (p) { return sq(ITEMS[p.id], 'by ' + p.author + ' · ♥ ' + p.likes); }).join('') + '</div></section>';
   }
   return h + '</main>';
 }
