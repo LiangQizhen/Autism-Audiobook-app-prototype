@@ -406,7 +406,7 @@ const S = {
   current: null, playing: false, pos: 0, wordIdx: 0,
   vol: 70, cap: 80, speed: 'Normal', textSize: 'M', calm: false, showWords: true,
   notForMe: new Set(), hidden: new Set(), blockedGenres: new Set(), sugg1: null, sugg2: null,
-  locked: false, community: true, pin: '',
+  locked: false, community: true, sharing: true, loudSafe: true, limit: 'No limit', content: 'All content', pin: '', recent: ['gymno', 'rain', 'timemachine', 'minuet'],
   rec: { state: 'idle', notes: [], t0: 0, heard: false }, metro: false, bpm: 80, pvol: 70, pieceName: '',
   posts: POSTS, following: new Set(['Mira']),
   history: [
@@ -437,8 +437,10 @@ function scores() {
 function finishedCount(genre) { return S.history.filter(function (h) { return h.ok && h.genre === genre; }).length; }
 function reasonFor(genre) {
   if (S.moodCalm && ['Calm piano', 'Ambient', 'Nature sounds'].indexOf(genre) >= 0) return 'Something gentle for today';
-  if (finishedCount(genre) > 0) return 'You often finish ' + genre.toLowerCase();
-  return 'You said you like ' + genre.toLowerCase();
+  const MUSIC = ['Calm piano', 'Ambient', 'Nature sounds'];
+  const label = { 'Calm piano': 'piano music', 'Ambient': 'ambient music', 'Nature sounds': 'nature sounds', 'Classic stories': 'classic stories', 'Mystery': 'mystery stories', 'Adventure': 'adventure stories' }[genre] || genre.toLowerCase();
+  if (finishedCount(genre) > 0) return MUSIC.indexOf(genre) >= 0 ? 'Based on your recently played music' : 'Based on books you recently finished';
+  return 'Because you enjoy ' + label;
 }
 function candidates(includeHidden) {
   const g = scores();
@@ -449,8 +451,8 @@ function candidates(includeHidden) {
     });
   });
   const out = [];
-  for (let round = 0; round < 3 && out.length < 5; round++) {
-    pools.forEach(function (pool, k) { if (pool[round] && out.length < 5) out.push({ it: pool[round], reason: reasonFor(genres[k]) }); });
+  for (let round = 0; round < 3 && out.length < 4; round++) {
+    pools.forEach(function (pool, k) { if (pool[round] && out.length < 4) out.push({ it: pool[round], reason: reasonFor(genres[k]) }); });
   }
   return out;
 }
@@ -590,6 +592,7 @@ function loop() {
 }
 function open(id, autoplay) {
   if (S.current !== id) { pause(); S.current = id; S.pos = 0; S.wordIdx = 0; P.logged = false; }
+  S.recent = [id].concat(S.recent.filter(function (x) { return x !== id; })).slice(0, 8);
   S.screen = 'player'; render();
   if (autoplay && !S.playing) { play(); render(); }
 }
@@ -688,7 +691,7 @@ function vWelcome() {
     const pages = [
       { art: '<div class="collage" style="width:100%" aria-hidden="true">' + pola(ITEMS.pride, 104, -7, 'a classic, read aloud') + pola(ITEMS.gymno, 112, 4, 'for quiet evenings') + pola(ITEMS.rain, 96, -2, 'rain, on repeat') + '</div>',
         hi: 'welcome', t: 'Books and music, in one calm place.', p: 'Listen to classic books read aloud, with words that light up as you go. Or relax with piano and nature sounds.' },
-      { art: '<div class="mockai" aria-hidden="true"><div class="r"><span class="aiicon">' + ic('spark', 26) + '</span><b class="grad" style="font-size:1.05rem">Picked for you</b></div>' +
+      { art: '<div class="mockai" aria-hidden="true"><div class="r"><span class="aiicon">' + ic('spark', 26) + '</span><b class="grad" style="font-size:1.05rem">Recommended for you</b></div>' +
           [ITEMS.gymno, ITEMS.holmes, ITEMS.ocean].map(function (it, k) { return '<div class="r">' + cover(it, 40) + '<span style="flex:1;display:flex;flex-direction:column;gap:6px"><span class="ln" style="width:' + [80, 64, 72][k] + '%"></span><span class="ln" style="width:' + [50, 40, 56][k] + '%;opacity:.6"></span></span></div>'; }).join('') + '</div>',
         hi: 'it gets to know you', t: 'Suggestions that fit you.', p: 'The app learns from what you finish and skip. Tell it what you like, and the picks get better.' },
       { art: '<div class="mockkeys" aria-hidden="true"><i></i><i class="k"></i><i></i><i></i><i class="k"></i><i></i><i></i><div class="mockpost"><span class="small" style="font-weight:800;color:var(--i)">Morning Steps</span><span class="small">Mira · Calm piano</span><span class="small" style="display:flex;align-items:center;gap:4px;color:#E5484D">' + ic('heart', 14, ' fill="currentColor"') + '12</span></div></div>',
@@ -748,7 +751,7 @@ function vFb() {
 
 /* first-time tour */
 const TOUR = [
-  { sel: '.ai-card', t: 'Picked for you', p: 'Suggestions based on what you play. Tap it to see them, and tell us if you like them.' },
+  { sel: '.ai-card', t: 'Recommended for you', p: 'Music picked from what you listen to. Tap it to see them, and tell us if you like them.' },
   { sel: '.nav [data-v="library"]', t: 'Library', p: 'All books and music, sorted by type. You can also search here.' },
   { sel: '.nav [data-v="create"]', t: 'Create', p: 'Play the piano, record a piece and share it with the community.' },
   { sel: '.nav [data-v="me"]', t: 'Me', p: 'Your interests, settings, and the caregiver area.' }
@@ -786,7 +789,7 @@ function vHome() {
   h += favs.length ? '<div class="hscroll pol">' + favs.map(function (f, k) { return '<button type="button" class="wv rv" data-a="play" data-v="' + f.id + '" aria-label="Play ' + esc(f.title) + '">' + pola(f, 108, [-3, 2.5, -1.5, 3][k % 4], f.title, f.by) + '</button>'; }).join('') + '</div>' : '<p class="empty hand">Nothing saved yet.</p><p class="small" style="text-align:center">Tap the heart in the player to keep something here.</p>';
   h += '</section>';
   h += '<section class="card ai-card"><button type="button" class="pickhead" data-a="picks" aria-expanded="' + S.pickOpen + '"><span class="aiicon">' + ic('spark', 28) + '</span>' +
-    '<span class="meta"><span class="title grad" style="font-size:1.15rem">Picked for you</span><span class="small">' + (picks.length ? picks.length + ' picks from what you finish and skip' : 'Listen to a few things first') + '</span></span>' +
+    '<span class="meta"><span class="title grad" style="font-size:1.15rem">Recommended for you</span><span class="small">' + (picks.length ? 'Gets better the more you listen' : 'Listen to a few things first') + '</span></span>' +
     (S.pickOpen ? '' : '<span class="stackc" aria-hidden="true">' + picks.slice(0, 3).map(function (p) { return cover(p.it, 34); }).join('') + '</span>') +
     '<span class="chevr" style="transform:rotate(' + (S.pickOpen ? 90 : 0) + 'deg)">' + ic('chev', 20) + '</span></button>';
   if (S.pickOpen && picks.length) {
@@ -860,13 +863,13 @@ function vPub() {
   let h = '<div class="sheet-back" data-a="pubclose"><div class="sheet" data-a="noop" role="dialog" aria-modal="true" aria-labelledby="pubT"><span class="grab" aria-hidden="true"></span>' +
     '<div class="stack" style="gap:4px"><span class="hand hi">nice one!</span><h2 id="pubT" class="big2">Share your piece</h2><p class="small">' + n + ' notes · ' + fmt(len) + '</p></div>' +
     '<button type="button" class="btn block" data-a="' + (playing ? 'recpause' : 'recplay') + '">' + ic(playing ? 'pause' : 'play', 20) + '<span>' + (playing ? 'Stop' : 'Listen first') + '</span></button>';
-  if (S.community) {
+  if (S.community && S.sharing) {
     h += '<div class="stack" style="gap:6px"><label class="title" for="piece">Give it a name</label><input id="piece" class="field" type="text" autocomplete="off" placeholder="My first piece" value="' + esc(S.pieceName) + '" data-in="piece"></div>' +
       '<p class="small">Everyone in the community can play it. Only kind replies are allowed.</p>' +
       '<button type="button" class="btn primary block big" data-a="publish">' + ic('note', 22) + '<span>Publish</span></button>' +
       '<button type="button" class="link" data-a="pubclose" style="align-self:center">Not now</button>';
   } else {
-    h += '<p class="empty hand">Sharing is turned off for now.</p><p class="small" style="text-align:center">Your caregiver can turn the community on.</p><button type="button" class="btn block" data-a="pubclose">Keep it for me</button>';
+    h += '<p class="empty hand">Sharing is turned off for now.</p><p class="small" style="text-align:center">Your caregiver can turn sharing on.</p><button type="button" class="btn block" data-a="pubclose">Keep it for me</button>';
   }
   return h + '</div></div>';
 }
@@ -903,6 +906,11 @@ function vMe() {
   if (S.editName) h += '<div class="stack" style="flex:1;gap:8px"><label for="nn" class="title">Your name</label><input id="nn" class="field" type="text" autocomplete="off" value="' + esc(S.newName) + '" data-in="newname"></div></div><div style="display:grid;grid-template-columns:1fr 1fr;gap:8px"><button type="button" class="btn" data-a="namecancel">Cancel</button><button type="button" class="btn primary" data-a="namesave">Save</button></div>';
   else h += '<span class="meta"><span class="title" style="font-size:1.35rem">' + esc(who()) + '</span><span class="small">Listener</span></span><button type="button" class="btn sm" data-a="nameedit">Edit</button></div>';
   h += '<div class="stats"><span><b>' + fin + '</b>listened</span><span><b>' + mine + '</b>pieces shared</span><span><b>' + S.following.size + '</b>following</span></div></section>';
+  const rp = S.recent.map(function (id) { return ITEMS[id]; }).filter(Boolean);
+  if (rp.length) h += '<section class="stack">' + sect('Recently played') + '<div class="hscroll">' + rp.map(function (it) {
+    return '<button type="button" class="wv rv" data-a="play" data-v="' + it.id + '" aria-label="Play ' + esc(it.title) + '" style="width:104px">' + cover(it, 104) +
+      '<span class="title" style="font-size:.86rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">' + esc(it.title) + '</span><span class="small" style="font-size:.76rem;margin-top:-6px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">' + esc(it.by) + '</span></button>';
+  }).join('') + '</div></section>';
   const ints = GENRES.filter(function (g) { return S.interests.has(g); });
   h += '<section class="stack">' + sect('My interests', '<button type="button" class="btn sm" data-a="intedit">' + (ints.length ? 'Edit' : 'Add') + '</button>') +
     (ints.length ? '<div class="chips">' + ints.map(function (g) { return '<span class="chip static">' + ic(GI[g], 18) + esc(g) + '</span>'; }).join('') + '</div><p class="small">Your picks on Home use these, together with what you listen to.</p>'
@@ -969,9 +977,18 @@ function vCaregiver() {
     }).join('') + '</ul></section>';
   h += '<section class="card">' + sect('Listening history') + '<ul class="list" style="gap:0">' +
     S.history.slice(0, 10).map(function (x, k) { return '<li style="display:flex;justify-content:space-between;gap:10px;padding:10px 0;' + (k ? 'border-top:1px solid var(--line)' : '') + '"><span class="meta"><span class="title" style="font-size:.95rem">' + esc(x.title) + '</span><span class="small">' + esc(x.genre) + ' · ' + esc(x.result) + '</span></span><span class="meta" style="flex:0 0 auto;align-items:flex-end"><span class="tag">' + esc(x.src) + '</span><span class="small">' + esc(x.when) + '</span></span></li>'; }).join('') + '</ul></section>';
-  h += '<section class="stack">' + sect('Controls') + sw('lock', S.locked, 'Lock settings', S.locked ? name + ' cannot change settings.' : name + ' can change settings.') +
-    sw('community', S.community, 'Community', S.community ? 'Can share pieces and see others.' : 'Turned off.') +
-    '<div class="card" style="gap:4px"><div class="between"><label class="title" for="cap">Highest volume</label><span class="small" id="capv">' + S.cap + '%</span></div><input id="cap" type="range" min="40" max="100" step="5" value="' + S.cap + '" data-in="cap"></div></section></main>';
+  h += '<section class="stack">' + sect('Time & sound') +
+    '<div class="card" style="gap:8px"><span class="title">Daily listening limit</span>' + chips('limit', ['No limit', '30 min', '1 hour', '2 hours'], S.limit) + '</div>' +
+    '<div class="card" style="gap:4px"><div class="between"><label class="title" for="cap">Highest volume</label><span class="small" id="capv">' + S.cap + '%</span></div><input id="cap" type="range" min="40" max="100" step="5" value="' + S.cap + '" data-in="cap"></div>' +
+    sw('loudsafe', S.loudSafe, 'Limit sudden loud sounds', S.loudSafe ? 'Volume changes smoothly, no sudden jumps.' : 'Off') + '</section>';
+  h += '<section class="stack">' + sect('Content') +
+    '<div class="card" style="gap:8px"><span class="title">Allowed content</span>' + chips('content', ['All content', 'Gentle only'], S.content) +
+    '<p class="small">' + (S.content === 'Gentle only' ? 'Hides stories with scary or intense scenes.' : 'Everything in the library can be played.') + '</p></div></section>';
+  h += '<section class="stack">' + sect('Community & settings') +
+    sw('community', S.community, 'Community', S.community ? 'Can see and like other people\'s pieces.' : 'Turned off.') +
+    sw('sharing', S.sharing, 'Public sharing', S.sharing ? 'Can publish piano pieces for everyone.' : 'Pieces stay private.') +
+    sw('lock', S.locked, 'Lock settings', S.locked ? name + ' cannot change settings.' : name + ' can change settings.') + '</section>' +
+    '<button type="button" class="btn primary block big" data-a="savecg">' + ic('check', 20, ' stroke-width="2.4"') + '<span>Save settings</span></button></main>';
   return h;
 }
 function vPlayer() {
@@ -1183,7 +1200,12 @@ const A = {
   },
   hideitem: function (v) { if (S.hidden.has(v)) S.hidden.delete(v); else S.hidden.add(v); },
   lock: function () { S.locked = !S.locked; },
-  community: function () { S.community = !S.community; }
+  community: function () { S.community = !S.community; },
+  sharing: function () { S.sharing = !S.sharing; },
+  loudsafe: function () { S.loudSafe = !S.loudSafe; },
+  limit: function (v) { S.limit = v; },
+  content: function (v) { S.content = v; },
+  savecg: function () { toast('Settings saved', who() + '\'s app is updated'); }
 };
 function pauseIfPlaying() { if (S.playing) pause(); }
 
