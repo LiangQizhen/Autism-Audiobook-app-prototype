@@ -70,7 +70,7 @@ p{margin:0}
 .tag.ai{background:var(--ai);color:#fff}
 .field{height:54px;width:100%;padding:0 18px;border-radius:18px;border:1px solid var(--line);background:rgba(255,255,255,.92);font-size:1rem;font-weight:600;box-shadow:inset 0 1px 2px rgba(24,40,58,.05)}
 .field::placeholder{color:var(--m);opacity:1}
-.nav{position:relative;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:4px;margin:0 14px 14px;padding:6px;border-radius:30px;background:rgba(255,255,255,.82);-webkit-backdrop-filter:blur(20px);backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,.85);box-shadow:0 12px 32px rgba(24,40,58,.14)}
+.nav{position:relative;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:2px;margin:0 12px 14px;padding:6px;border-radius:30px;background:rgba(255,255,255,.82);-webkit-backdrop-filter:blur(20px);backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,.85);box-shadow:0 12px 32px rgba(24,40,58,.14)}
 .nav button{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;min-height:56px;border:0;border-radius:24px;background:transparent;font-size:.74rem;font-weight:700;color:var(--m);transition:background .3s var(--ease),color .3s}
 .nav button[aria-current="page"]{background:var(--i);color:#fff}
 .cover{flex-shrink:0;border-radius:14px;display:flex;flex-direction:column;justify-content:space-between;padding:8px;overflow:hidden;text-align:left;box-shadow:inset 0 0 0 1px rgba(255,255,255,.45),0 6px 16px rgba(24,40,58,.14)}
@@ -776,7 +776,8 @@ const TOUR = [
   { sel: '#recSec', t: 'Recommended for you', p: 'Music picked from what you listen to. Tap Yes or No below to tell us if you like it.' },
   { sel: '.nav [data-v="library"]', t: 'Library', p: 'All books and music, sorted by type. You can also search here.' },
   { sel: '.nav [data-v="create"]', t: 'Create', p: 'Play the piano, record a piece and share it with the community.' },
-  { sel: '.nav [data-v="me"]', t: 'Me', p: 'Your interests, settings, and the caregiver area.' }
+  { sel: '.nav [data-v="me"]', t: 'Me', p: 'Your profile, interests and recently played.' },
+  { sel: '.nav [data-v="settings"]', t: 'Settings', p: 'Sound, text size and motion. The caregiver area is here too, with a PIN.' }
 ];
 function drawTour() {
   const old = document.getElementById('tour'); if (old) old.remove();
@@ -939,7 +940,7 @@ function vMe() {
   h += '<section class="stack">' + sect('My interests', '<button type="button" class="btn sm" data-a="intedit">' + (ints.length ? 'Edit' : 'Add') + '</button>') +
     (ints.length ? '<div class="chips">' + ints.map(function (g) { return '<span class="chip static">' + ic(GI[g], 18) + esc(g) + '</span>'; }).join('') + '</div><p class="small">Your picks on Home use these, together with what you listen to.</p>'
       : '<p class="empty hand">Nothing picked yet.</p>') + '</section>';
-  h += entry('caregiver', 'lock', 'Caregiver area', 'For parents and support workers. Needs a PIN.', true) + '</main>';
+  h += '</main>';
   return h;
 }
 function vSheet() {
@@ -951,15 +952,16 @@ function vSheet() {
     '<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px"><button type="button" class="btn" data-a="intcancel">Cancel</button><button type="button" class="btn primary" data-a="intsave">Save</button></div></div></div>';
 }
 function vSettings() {
-  let h = '<main class="main" id="scroller">' + back('toMe', 'Me') + '<header class="stack" style="gap:6px"><span class="hand hi">make it feel right</span><h1 class="big">Settings</h1></header>';
+  let h = '<main class="main" id="scroller"><header class="stack" style="gap:6px"><span class="hand hi">make it feel right</span><h1 class="big">Settings</h1></header>';
   if (S.locked) {
     return h + '<div class="card" style="flex-direction:row;align-items:center;gap:10px">' + ic('lock', 24) + '<p class="sub" style="color:var(--i)">Your caregiver has locked these settings.</p></div>' +
-      '<div class="card"><p class="title">Reading speed: ' + S.speed + '</p><p class="title">Volume: ' + S.vol + '%</p><p class="title">Reduce motion: ' + (S.calm ? 'On' : 'Off') + '</p><p class="title">Text size: ' + S.textSize + '</p></div></main>';
+      '<div class="card"><p class="title">Reading speed: ' + S.speed + '</p><p class="title">Volume: ' + S.vol + '%</p><p class="title">Reduce motion: ' + (S.calm ? 'On' : 'Off') + '</p><p class="title">Text size: ' + S.textSize + '</p></div>' + '<section class="stack">' + sect('Caregiver') + entry('caregiver', 'lock', 'Caregiver area', 'Parental controls for parents and support workers. Needs a PIN.', true) + '</section>' + '</main>';
   }
   h += '<section class="stack">' + sect('Listening') + '<div class="card" style="gap:4px"><div class="between"><label class="title" for="vol">Volume</label><span class="small" id="volv">' + S.vol + '%</span></div><input id="vol" type="range" min="0" max="' + S.cap + '" step="5" value="' + Math.min(S.vol, S.cap) + '" data-in="vol"><p class="small">Your caregiver set the highest volume to ' + S.cap + '%.</p></div>' +
     '<div class="stack" style="gap:6px"><span class="title">Reading speed for books</span>' + chips('speed', ['Slow', 'Normal', 'Fast'], S.speed) + '</div></section>' +
     '<section class="stack">' + sect('Sensory') + sw('calm', S.calm, 'Reduce motion', 'No moving effects') + sw('showwords', S.showWords, 'Show words while listening', 'Highlights each word of a book') +
     '<div class="stack" style="gap:6px"><span class="title">Text size</span>' + chips('textsize', ['S', 'M', 'L'], S.textSize) + '</div></section>' +
+    '<section class="stack">' + sect('Caregiver') + entry('caregiver', 'lock', 'Caregiver area', 'Parental controls for parents and support workers. Needs a PIN.', true) + '</section>' +
     '<section class="stack">' + sect('About') + '<button type="button" class="btn block" data-a="replay">' + ic('restart', 20) + '<span>Show first-time setup again</span></button></section></main>';
   return h;
 }
@@ -970,7 +972,7 @@ function vPin() {
   let keys = '<div class="keypad">';
   ['1', '2', '3', '4', '5', '6', '7', '8', '9'].forEach(function (d) { keys += '<button type="button" data-a="pin" data-v="' + d + '">' + d + '</button>'; });
   keys += '<span></span><button type="button" data-a="pin" data-v="0">0</button><button type="button" data-a="pindel" aria-label="Delete the last number">' + ic('back', 26) + '</button></div>';
-  return '<main class="main">' + back('toMe', 'Back') + '<div style="display:flex;flex-direction:column;align-items:center;gap:8px;text-align:center"><span class="av" style="width:64px;height:64px;border-radius:20px;background:var(--i);color:#fff">' + ic('lock', 32) + '</span><span class="hand hi">for parents and support workers</span><h1 class="big" style="font-size:2rem">Caregiver area</h1><p class="sub">Enter your 4-number PIN.</p></div>' +
+  return '<main class="main">' + back('settings', 'Settings') + '<div style="display:flex;flex-direction:column;align-items:center;gap:8px;text-align:center"><span class="av" style="width:64px;height:64px;border-radius:20px;background:var(--i);color:#fff">' + ic('lock', 32) + '</span><span class="hand hi">for parents and support workers</span><h1 class="big" style="font-size:2rem">Caregiver area</h1><p class="sub">Enter your 4-number PIN.</p></div>' +
     dots + (S.pinErr ? '<p class="err" style="justify-content:center" role="alert">Wrong PIN. Please try again.</p>' : '<p class="small" style="text-align:center">' + (S.userPin ? 'Use the PIN set when the account was created.' : 'Prototype: any 4 numbers work.') + '</p>') +
     keys + (S.userPin ? '<button type="button" class="link" data-a="forgotpin" style="align-self:center">Forgot PIN?</button>' : '') + '</main>';
 }
@@ -980,7 +982,7 @@ function vCaregiver() {
   const top = Object.keys(counts).sort(function (a, b) { return counts[b] - counts[a]; });
   const skipped = Array.from(new Set(S.history.filter(function (h) { return !h.ok; }).map(function (h) { return h.genre; })));
   const name = who();
-  let h = '<div class="hdr"><button type="button" class="btn sm" data-a="toMe">' + ic('back', 20) + '<span>Back to the app</span></button><div class="stack" style="gap:4px"><span class="hand hi" style="color:#C9D5E2">this week with ' + esc(name) + '</span><h1 class="big" style="font-size:2rem">Caregiver area</h1></div>' +
+  let h = '<div class="hdr"><button type="button" class="btn sm" data-a="settings">' + ic('back', 20) + '<span>Back to settings</span></button><div class="stack" style="gap:4px"><span class="hand hi" style="color:#C9D5E2">this week with ' + esc(name) + '</span><h1 class="big" style="font-size:2rem">Caregiver area</h1></div>' +
     '<div class="stats light"><span><b>' + ok.length + '</b>finished</span><span><b>' + (S.history.length - ok.length) + '</b>skipped</span><span><b>' + top.length + '</b>kinds liked</span></div></div><main class="main" id="scroller">';
   h += '<section class="card">' + sect('What ' + esc(name) + ' finished') +
     top.slice(0, 4).map(function (g) { const pct = Math.round(counts[g] / ok.length * 100); return '<div class="gbar"><span>' + esc(g) + '</span><span class="bar" role="img" aria-label="' + pct + ' percent"><i style="width:' + pct + '%"></i></span><span>' + pct + '%</span></div>'; }).join('') +
@@ -1036,7 +1038,7 @@ function vPlayer() {
   return h + '</main>';
 }
 function vNav() {
-  const tabs = [['home', 'Home', 'home'], ['library', 'Library', 'book'], ['create', 'Create', 'piano'], ['me', 'Me', 'user']];
+  const tabs = [['home', 'Home', 'home'], ['library', 'Library', 'book'], ['create', 'Create', 'piano'], ['me', 'Me', 'user'], ['settings', 'Settings', 'gear']];
   let mini = '';
   const it = cur();
   if (it) mini = '<div class="mini"><button type="button" class="open" data-a="open" data-v="' + it.id + '">' + cover(it, 40) + '<span class="meta"><span class="t">' + esc(it.title) + '</span><span class="bar"><i id="mbar" style="width:' + progress().pct + '%"></i></span></span></button><button type="button" class="pp" data-a="toggle" aria-label="' + (S.playing ? 'Pause' : 'Play') + '">' + ic(S.playing ? 'pause' : 'play', 22) + '</button></div>';
@@ -1060,7 +1062,7 @@ function render() {
   else if (S.screen === 'settings') h = vSettings();
   else if (S.screen === 'pin') h = vPin();
   else if (S.screen === 'caregiver') h = vCaregiver();
-  else h = topbar() + { home: vHome, library: vLibrary, create: vCreate, me: vMe }[S.tab]() + vNav() + (S.tab === 'me' && S.editInt ? vSheet() : '') + (S.tab === 'create' && S.pubOpen ? vPub() : '') + (S.tab === 'home' && S.fbOpen ? vFb() : '');
+  else h = topbar() + { home: vHome, library: vLibrary, create: vCreate, me: vMe, settings: vSettings }[S.tab]() + vNav() + (S.tab === 'me' && S.editInt ? vSheet() : '') + (S.tab === 'create' && S.pubOpen ? vPub() : '') + (S.tab === 'home' && S.fbOpen ? vFb() : '');
   const entering = key !== lastKey;
   view.classList.toggle('enter', entering && !calm());
   view.innerHTML = h;
@@ -1201,7 +1203,7 @@ const A = {
   namecancel: function () { S.editName = false; },
   namesave: function () { S.name = S.newName.trim() || S.name; S.editName = false; saveUser(); },
   interest: function (v) { if (S.interests.has(v)) S.interests.delete(v); else S.interests.add(v); },
-  settings: function () { S.screen = 'settings'; },
+  settings: function () { S.screen = 'tabs'; S.tab = 'settings'; },
   caregiver: function () { S.screen = 'pin'; S.pin = ''; S.pinErr = false; },
   toMe: function () { S.screen = 'tabs'; S.tab = 'me'; },
   speed: function (v) { S.speed = v; const it = cur(); if (it && it.type === 'book' && S.playing) { pause(); play(); } },
